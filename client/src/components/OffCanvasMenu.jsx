@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
-import SideMenu from "./Menu/SideMenu";
+import SideMenu from "./menu/SideMenu";
 
 const OffCanvasMenu = () => {
   const [show, setShow] = useState(false);

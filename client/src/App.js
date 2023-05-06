@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 // Components
 import NavBar from "./components/NavBar";
-import SideMenu from "./components/Menu/SideMenu";
+import SideMenu from "./components/menu/SideMenu";
 import OffCanvasMenu from "./components/OffCanvasMenu";
 
 // Pages
