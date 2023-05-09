@@ -20,7 +20,12 @@ const MenuItems = ({ pageName, activePage, setActivePage, title, icon }) => {
           }
         >
           {icon}
-          <span className="fs-4 d-sm-none d-lg-block ">{title}</span>
+          <span
+            className="fs-4 d-sm-none d-lg-block "
+            style={{ fontFamily: "Georgia", fontWeight: "bold" }}
+          >
+            {title}
+          </span>
         </span>
       </Link>
     </li>

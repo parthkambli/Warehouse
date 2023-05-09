@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { FaWarehouse, FaBoxOpen, FaShoppingCart } from "react-icons/fa";
+import { FaWarehouse, FaShoppingCart } from "react-icons/fa";
 import { FiShoppingBag, FiClock } from "react-icons/fi";
 import MenuItems from "./MenuItems";
 
@@ -31,13 +31,6 @@ const SideMenu = (props) => {
           setActivePage={setActivePage}
           title="Inventory"
           icon={<FaWarehouse className="mx-4 fs-3" />}
-        />
-        <MenuItems
-          pageName="/spare"
-          activePage={activePage}
-          setActivePage={setActivePage}
-          title="Spare"
-          icon={<FaBoxOpen className="mx-4 fs-3" />}
         />
         <MenuItems
           pageName="/sale"
