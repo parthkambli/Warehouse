@@ -48,7 +48,7 @@ const PurchaseTable = () => {
                   </Link>
                 </span>
                 <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-delete" className="text-white">
+                  <Link to="/purchase-delete/" className="text-white">
                     <Badge className="bg-danger ">
                       <FaRegTrashAlt className="fs-4" />
                     </Badge>
@@ -177,7 +177,7 @@ const PurchaseTable = () => {
         //   color: "#eeeeee",
         // }}
       >
-        Sale
+        Purchase
       </Button>
     </>
   );

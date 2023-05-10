@@ -1,9 +1,18 @@
+import { useContext, useEffect } from "react";
+import { ProductContext } from "../../context/product/ProductContext";
+
 import { Badge, Button, Table } from "react-bootstrap";
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import { GoEye } from "react-icons/go";
 import { Link } from "react-router-dom";
 
 const InventoryTable = () => {
+  const { products, getProducts } = useContext(ProductContext);
+
+  useEffect(() => {
+    getProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <div
@@ -34,187 +43,63 @@ const InventoryTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Hand Bag</td>
-              <td>5</td>
-              <td>2</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-detail" className="text-white">
-                    <Badge className="bg-warning ">
-                      <GoEye className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Hand Bag</td>
-              <td>5</td>
-              <td>2</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-detail" className="text-white">
-                    <Badge className="bg-warning ">
-                      <GoEye className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Hand Bag</td>
-              <td>5</td>
-              <td>2</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-detail" className="text-white">
-                    <Badge className="bg-warning ">
-                      <GoEye className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Hand Bag</td>
-              <td>5</td>
-              <td>2</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-detail" className="text-white">
-                    <Badge className="bg-warning ">
-                      <GoEye className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Hand Bag</td>
-              <td>5</td>
-              <td>2</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-detail" className="text-white">
-                    <Badge className="bg-warning ">
-                      <GoEye className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Hand Bag</td>
-              <td>5</td>
-              <td>2</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-detail" className="text-white">
-                    <Badge className="bg-warning ">
-                      <GoEye className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/product-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
+            {products.length <= 0 ? (
+              <tr>
+                <td colSpan="4">No product found</td>
+              </tr>
+            ) : (
+              products.map((product) => (
+                <tr key={product._id}>
+                  <td>{product.Product_Name}</td>
+                  <td>{product.Quantity}</td>
+                  <td>{product.Spare}</td>
+                  <td className="row m-0">
+                    <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
+                      <Link
+                        to={`/product-view/${product._id}`}
+                        className="text-white"
+                      >
+                        <Badge className="bg-warning ">
+                          <GoEye className="fs-4" />
+                        </Badge>
+                      </Link>
+                    </span>
+                    <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
+                      <Link
+                        to={`/product-edit/${product._id}`}
+                        className="text-white"
+                      >
+                        <Badge className="bg-success ">
+                          <FaPencilAlt className="fs-4" />
+                        </Badge>
+                      </Link>
+                    </span>
+                    <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
+                      <Link to="/product-delete" className="text-white">
+                        <Badge className="bg-danger ">
+                          <FaRegTrashAlt className="fs-4" />
+                        </Badge>
+                      </Link>
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </Table>
       </div>
-      <Button
-        variant="primary"
-        className="m-2 float-end"
-        // style={{
-        //   backgroundColor: "#3282B8",
-        //   color: "#eeeeee",
-        // }}
-      >
-        Add Product
-      </Button>
+      <Link to="/product-add">
+        <Button
+          variant="primary"
+          className="m-2 float-end"
+          // style={{
+          //   backgroundColor: "#3282B8",
+          //   color: "#eeeeee",
+          // }}
+        >
+          Add Product
+        </Button>
+      </Link>
     </>
   );
 };
