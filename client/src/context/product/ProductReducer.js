@@ -20,6 +20,14 @@ export default (state, action) => {
         products: [...state.products, action.payload],
       };
 
+    case "DELETE_PRODUCT":
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product._id !== action.payload
+        ),
+      };
+
     case "ERROR":
       return {
         ...state,

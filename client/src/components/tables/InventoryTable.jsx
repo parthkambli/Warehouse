@@ -7,7 +7,7 @@ import { GoEye } from "react-icons/go";
 import { Link } from "react-router-dom";
 
 const InventoryTable = () => {
-  const { products, getProducts } = useContext(ProductContext);
+  const { products, getProducts, deleteProduct } = useContext(ProductContext);
 
   useEffect(() => {
     getProducts();
@@ -75,11 +75,12 @@ const InventoryTable = () => {
                       </Link>
                     </span>
                     <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                      <Link to="/product-delete" className="text-white">
-                        <Badge className="bg-danger ">
-                          <FaRegTrashAlt className="fs-4" />
-                        </Badge>
-                      </Link>
+                      <Badge
+                        className="bg-danger"
+                        onClick={() => deleteProduct(product._id)}
+                      >
+                        <FaRegTrashAlt className="fs-4" />
+                      </Badge>
                     </span>
                   </td>
                 </tr>

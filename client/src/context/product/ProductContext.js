@@ -72,6 +72,22 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
+  // Delete product -------------------------------
+  async function deleteProduct(id) {
+    try {
+      await axios.delete(`/api/products/${id}`);
+      dispatch({
+        type: "DELETE_PRODUCT",
+        payload: id,
+      });
+    } catch (error) {
+      dispatch({
+        type: "ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   return (
     <ProductContext.Provider
       value={{
@@ -82,6 +98,7 @@ export const ProductProvider = ({ children }) => {
         getProducts,
         getProduct,
         addProduct,
+        deleteProduct,
       }}
     >
       {children}
