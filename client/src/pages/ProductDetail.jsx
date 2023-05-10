@@ -9,7 +9,7 @@ import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
 
 const ProductDetail = () => {
-  const { product, getProduct } = useContext(ProductContext);
+  const { product, getProduct, deleteProduct } = useContext(ProductContext);
   console.log("product = " + product);
   const { id } = useParams();
   useEffect(() => {
@@ -59,8 +59,11 @@ const ProductDetail = () => {
                 </Link>
               </span>
               <span className="text-center  m-auto mx-2 p-0 col-sm-3 col-12">
-                <Link to="/product-delete" className="text-white">
-                  <Badge className="bg-danger ">
+                <Link to="/inventory" className="text-white">
+                  <Badge
+                    className="bg-danger "
+                    onClick={() => deleteProduct(product._id)}
+                  >
                     <FaRegTrashAlt className="fs-2" />
                   </Badge>
                 </Link>
