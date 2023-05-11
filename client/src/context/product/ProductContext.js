@@ -72,6 +72,27 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
+  // Edit product ---------------------------------
+  async function editProduct(id, product) {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.patch(`/api/products/${id}`, product, config);
+      dispatch({
+        type: "EDIT_PRODUCT",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   // Delete product -------------------------------
   async function deleteProduct(id) {
     try {
@@ -98,6 +119,7 @@ export const ProductProvider = ({ children }) => {
         getProducts,
         getProduct,
         addProduct,
+        editProduct,
         deleteProduct,
       }}
     >

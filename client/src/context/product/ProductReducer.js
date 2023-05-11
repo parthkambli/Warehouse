@@ -20,6 +20,13 @@ export default (state, action) => {
         products: [...state.products, action.payload],
       };
 
+    case "EDIT_PRODUCT":
+      return {
+        ...state,
+        product: action.payload,
+        loading: false,
+      };
+
     case "DELETE_PRODUCT":
       return {
         ...state,

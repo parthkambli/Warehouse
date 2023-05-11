@@ -1,6 +1,45 @@
-import { Button, Form } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
+import { Button, Form, Spinner } from "react-bootstrap";
+import { ProductContext } from "../context/product/ProductContext";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProductEdit = () => {
+  const { product, getProduct, editProduct, loading } =
+    useContext(ProductContext);
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [productName, setProductName] = useState("");
+  const [model, setModel] = useState("");
+  const [spare, setSpare] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      getProduct(id);
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!loading && product) {
+      setProductName(product.Product_Name);
+      setModel(product.Model_No);
+      setSpare(product.Spare);
+    }
+  }, [loading, product]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const editedProduct = {
+      Product_Name: productName,
+      Model_NO: model,
+      Spare: spare,
+    };
+    editProduct(id, editedProduct);
+    navigate("/inventory");
+  };
+
   return (
     <div className="col-sm-9 p-sm-5">
       <h1
@@ -13,20 +52,42 @@ const ProductEdit = () => {
         className="border border-2 rounded-5 p-4"
         style={{ height: "65vh", backgroundColor: "#eeeeee" }}
       >
-        <Form>
-          <Form.Group className="mb-3">
-            <Form.Label>Product Name :-</Form.Label>
-            <Form.Control type="text" placeholder="Enter Product Name" />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Model Number :-</Form.Label>
-            <Form.Control type="text" placeholder="Enter Model Number" />
-          </Form.Group>
-
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+        {loading ? (
+          <Spinner animation="border" variant="primary" />
+        ) : (
+          <Form onSubmit={onSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Product Name :-</Form.Label>
+              <Form.Control
+                type="text"
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+                placeholder="Enter Product Name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Model Number :-</Form.Label>
+              <Form.Control
+                type="text"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+                placeholder="Enter Model Number"
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>Spare :-</Form.Label>
+              <Form.Control
+                type="number"
+                value={spare}
+                onChange={(e) => setSpare(e.target.value)}
+                placeholder="Enter Saper"
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Edit
+            </Button>
+          </Form>
+        )}
       </div>
     </div>
   );
