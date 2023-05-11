@@ -49,7 +49,11 @@ const ProductEdit = () => {
         Edit Product :-
       </h1>
       <div
-        className="border border-2 rounded-5 p-4"
+        className={
+          loading
+            ? "border border-2 rounded-5 p-4 d-flex align-items-center justify-content-center"
+            : "border border-2 rounded-5 p-4"
+        }
         style={{ height: "65vh", backgroundColor: "#eeeeee" }}
       >
         {loading ? (
