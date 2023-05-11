@@ -8,6 +8,7 @@ dotenv.config({ path: "./config/config.env" });
 connectDB();
 
 import productsRoute from "./routes/products.js";
+import salesRoute from "./routes/sales.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV === "Devlopment") {
 }
 
 app.use("/api/products", productsRoute);
+app.use("/api/sales", salesRoute);
 
 const Port = process.env.PORT;
 
