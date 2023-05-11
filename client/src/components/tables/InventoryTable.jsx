@@ -1,13 +1,14 @@
 import { useContext, useEffect } from "react";
 import { ProductContext } from "../../context/product/ProductContext";
 
-import { Badge, Button, Table } from "react-bootstrap";
+import { Badge, Button, Spinner, Table } from "react-bootstrap";
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import { GoEye } from "react-icons/go";
 import { Link } from "react-router-dom";
 
 const InventoryTable = () => {
-  const { products, getProducts, deleteProduct } = useContext(ProductContext);
+  const { products, getProducts, deleteProduct, loading } =
+    useContext(ProductContext);
 
   useEffect(() => {
     getProducts();
@@ -17,7 +18,11 @@ const InventoryTable = () => {
     <>
       <div
         className="border border-2"
-        style={{ height: "65vh", overflowY: "scroll" }}
+        style={{
+          height: "65vh",
+          overflowY: "scroll",
+          backgroundColor: "#eeeeee",
+        }}
       >
         <Table
           className="align-middle text-center "
@@ -43,7 +48,13 @@ const InventoryTable = () => {
             </tr>
           </thead>
           <tbody>
-            {products.length <= 0 ? (
+            {loading ? (
+              <tr>
+                <td colSpan="4">
+                  <Spinner animation="border" variant="primary" />
+                </td>
+              </tr>
+            ) : products.length <= 0 ? (
               <tr>
                 <td colSpan="4">No product found</td>
               </tr>

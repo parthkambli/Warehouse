@@ -5,6 +5,7 @@ export default (state, action) => {
       return {
         ...state,
         products: action.payload,
+        loading: false,
       };
 
     case "GET_PRODUCT":
