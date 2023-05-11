@@ -55,10 +55,11 @@ export const addProduct = async (req, res) => {
     return res.status(200).json({ success: true, data: product });
   } catch (error) {
     if (error.name === "ValidationError") {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         error: Object.values(error.errors).map((val) => val.message),
       });
+    } else {
       return res.status(500).json({ success: false, error: "Server Error" });
     }
   }

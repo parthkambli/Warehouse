@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
-const saleSchema = new mongoose.Schema(
+const purchaseSchema = new mongoose.Schema(
   {
     Product_Name: {
       type: String,
       trim: true,
       required: [true, "Product name is required"],
     },
-    Customer: {
+    Supplier: {
       type: String,
       trim: true,
       required: [true, "Customer Name is required"],
@@ -20,4 +20,5 @@ const saleSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-export default mongoose.model("Sale", saleSchema);
+
+export default mongoose.model("Purchase", purchaseSchema);

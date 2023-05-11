@@ -9,6 +9,7 @@ connectDB();
 
 import productsRoute from "./routes/products.js";
 import salesRoute from "./routes/sales.js";
+import purchaseRoute from "./routes/purchase.js";
 
 const app = express();
 
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV === "Devlopment") {
 
 app.use("/api/products", productsRoute);
 app.use("/api/sales", salesRoute);
+app.use("/api/purchases", purchaseRoute);
 
 const Port = process.env.PORT;
 
