@@ -12,7 +12,7 @@ const initialState = {
 // Create Context -----------------------------------------------------------------------------------
 export const SaleContext = createContext(initialState);
 
-// Procider Component --------------------------------------------------------------------------------
+// Provider Component --------------------------------------------------------------------------------
 export const SaleProvider = ({ children }) => {
   const [state, dispatch] = useReducer(SaleReducer, initialState);
 
