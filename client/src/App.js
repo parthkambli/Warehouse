@@ -19,28 +19,31 @@ import SaleEdit from "./pages/SaleEdit";
 import PurchaseEdit from "./pages/PurchaseEdit";
 import { ProductProvider } from "./context/product/ProductContext";
 import ProductAdd from "./pages/ProductAdd";
+import { SaleProvider } from "./context/sale/SaleContext";
 
 const App = () => {
   return (
     <ProductProvider>
-      <BrowserRouter>
-        <NavBar />
-        <OffCanvasMenu />
-        <div className="row m-0">
-          <SideMenu className="d-sm-block d-none col-sm-3 " />
-          <Routes>
-            <Route path="/inventory" element={<Inventory />} />
-            <Route path="/sale" element={<Sale />} />
-            <Route path="/purchase" element={<Purchase />} />
-            <Route path="/standby" element={<Standby />} />
-            <Route path="/product-view/:id" element={<ProductDetail />} />
-            <Route path="/product-add" element={<ProductAdd />} />
-            <Route path="/product-edit/:id" element={<ProductEdit />} />
-            <Route path="/sale-edit" element={<SaleEdit />} />
-            <Route path="/purchase-edit" element={<PurchaseEdit />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+      <SaleProvider>
+        <BrowserRouter>
+          <NavBar />
+          <OffCanvasMenu />
+          <div className="row m-0">
+            <SideMenu className="d-sm-block d-none col-sm-3 " />
+            <Routes>
+              <Route path="/inventory" element={<Inventory />} />
+              <Route path="/sale" element={<Sale />} />
+              <Route path="/purchase" element={<Purchase />} />
+              <Route path="/standby" element={<Standby />} />
+              <Route path="/product-view/:id" element={<ProductDetail />} />
+              <Route path="/product-add" element={<ProductAdd />} />
+              <Route path="/product-edit/:id" element={<ProductEdit />} />
+              <Route path="/sale-edit" element={<SaleEdit />} />
+              <Route path="/purchase-edit" element={<PurchaseEdit />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </SaleProvider>
     </ProductProvider>
   );
 };
