@@ -57,10 +57,10 @@ export const saleProduct = async (req, res) => {
       { $inc: { Quantity: -req.body.Quantity } }
     );
 
-    return res.status(200).json({ success: true, date: sale });
+    return res.status(200).json({ success: true, data: sale });
   } catch (error) {
     if (error.name === "ValidationError") {
-     return res.status(400).json({
+      return res.status(400).json({
         success: false,
         error: Object.values(error.errors).map((val) => val.message),
       });

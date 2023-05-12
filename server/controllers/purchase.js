@@ -28,7 +28,6 @@ export const purchaseProduct = async (req, res) => {
     const product = await Product.findOne({
       Product_Name: req.body.Product_Name,
     });
-    console.log("searched product");
 
     // checking the existence of product
     if (!product) {
@@ -36,7 +35,6 @@ export const purchaseProduct = async (req, res) => {
         .status(404)
         .json({ success: false, error: "Product not found" });
     }
-    console.log("exists");
 
     // condition to purchase less then 0 product
     if (req.body.Quantity <= 0) {
@@ -45,18 +43,15 @@ export const purchaseProduct = async (req, res) => {
         error: "You canot purchase 0 or less product",
       });
     }
-    console.log("qty > 0");
 
     // Creating purchase
     const purchase = await Purchase.create(req.body);
-    console.log("Created purchase");
 
     // Updating the product quantity
     await Product.findByIdAndUpdate(
       { _id: product._id },
       { $inc: { Quantity: +req.body.Quantity } }
     );
-    console.log("Updated Product quantity");
 
     return res.status(200).json({ success: true, data: purchase });
   } catch (error) {

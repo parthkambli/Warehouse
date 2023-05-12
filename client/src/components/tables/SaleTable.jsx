@@ -1,8 +1,19 @@
-import { Badge, Button, Table } from "react-bootstrap";
-import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
+import { useContext, useEffect } from "react";
+import { Badge, Button, Spinner, Table } from "react-bootstrap";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { SaleContext } from "../../context/sale/SaleContext";
+
+import { format } from "date-fns";
 
 const SaleTable = () => {
+  const { sales, getSales, deleteSale, loading } = useContext(SaleContext);
+
+  useEffect(() => {
+    getSales();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <div
@@ -17,7 +28,7 @@ const SaleTable = () => {
           hover
         >
           <thead
-             className="align-middle text-center fs-5"
+            className="align-middle text-center fs-5"
             style={{
               backgroundColor: "#3282B8",
               color: "#eeeeee",
@@ -34,152 +45,51 @@ const SaleTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-              <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-              <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-              <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-              <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-              <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-              <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/sale-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
-        
+            {loading ? (
+              <tr>
+                <td colSpan="5">
+                  <Spinner animation="border" variant="primary" />
+                </td>
+              </tr>
+            ) : sales.length <= 0 ? (
+              <tr>
+                <td colSpan="5">No Sales record found</td>
+              </tr>
+            ) : (
+              sales.map((sale) => (
+                <tr key={sale._id}>
+                  <td>{sale.Product_Name}</td>
+                  <td>{sale.Customer}</td>
+                  <td>{sale.Quantity}</td>
+                  <td>{format(new Date(sale.createdAt), "dd MMM yyyy")}</td>
+                  <td className="row m-0">
+                    <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
+                      <Badge
+                        className="bg-danger"
+                        onClick={() => deleteSale(sale._id)}
+                      >
+                        <FaRegTrashAlt className="fs-4" />
+                      </Badge>
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </Table>
       </div>
-      <Button
-        variant="primary"
-        className="m-2 float-end"
-        // style={{
-        //   backgroundColor: "#3282B8",
-        //   color: "#eeeeee",
-        // }}
-      >
-        Sale
-      </Button>
+      <Link to="/sale-add">
+        <Button
+          variant="primary"
+          className="m-2 float-end"
+          // style={{
+          //   backgroundColor: "#3282B8",
+          //   color: "#eeeeee",
+          // }}
+        >
+          Sale
+        </Button>
+      </Link>
     </>
   );
 };
