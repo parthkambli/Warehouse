@@ -11,7 +11,7 @@ export default (state, action) => {
     case "ADD_SALE":
       return {
         ...state,
-        sales: [action.payload, ...state.sales],
+        sales: [...state.sales, action.payload],
       };
 
     case "DELETE_SALE":

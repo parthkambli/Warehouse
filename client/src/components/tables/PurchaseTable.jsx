@@ -1,8 +1,20 @@
-import { Badge, Button, Table } from "react-bootstrap";
-import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
+import { useContext, useEffect } from "react";
+import { Badge, Button, Spinner, Table } from "react-bootstrap";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { PurchaseContex } from "../../context/purchase/PurchaseContext";
+
+import { format } from "date-fns";
 
 const PurchaseTable = () => {
+  const { purchases, getPurchases, deletePurchase, loading } =
+    useContext(PurchaseContex);
+
+  useEffect(() => {
+    getPurchases();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <div
@@ -34,151 +46,52 @@ const PurchaseTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-delete/" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>{" "}
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>{" "}
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>{" "}
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>{" "}
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>{" "}
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-edit" className="text-white">
-                    <Badge className="bg-success ">
-                      <FaPencilAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-                <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                  <Link to="/purchase-delete" className="text-white">
-                    <Badge className="bg-danger ">
-                      <FaRegTrashAlt className="fs-4" />
-                    </Badge>
-                  </Link>
-                </span>
-              </td>
-            </tr>
+            {console.log(loading)}
+            {loading ? (
+              <tr>
+                <td colSpan="5">
+                  <Spinner animation="border" variant="primary" />
+                </td>
+              </tr>
+            ) : purchases.length <= 0 ? (
+              <tr>
+                <td colSpan="5">No Purchase record found</td>
+              </tr>
+            ) : (
+              purchases.map((purchase) => (
+                <tr key={purchase._id}>
+                  <td>{purchase.Product_Name}</td>
+                  <td>{purchase.Supplier}</td>
+                  <td>{purchase.Quantity}</td>
+                  <td>{format(new Date(purchase.createdAt), "dd MMM yyyy")}</td>
+                  <td className="row m-0">
+                    <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
+                      <Badge
+                        className="bg-danger"
+                        onClick={() => deletePurchase(purchase._id)}
+                      >
+                        <FaRegTrashAlt className="fs-4" />
+                      </Badge>
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </Table>
       </div>
-      <Button
-        variant="primary"
-        className="m-2 float-end"
-        // style={{
-        //   backgroundColor: "#3282B8",
-        //   color: "#eeeeee",
-        // }}
-      >
-        Purchase
-      </Button>
+      <Link to="/purchase-add">
+        <Button
+          variant="primary"
+          className="m-2 float-end"
+          // style={{
+          //   backgroundColor: "#3282B8",
+          //   color: "#eeeeee",
+          // }}
+        >
+          Purchase
+        </Button>
+      </Link>
     </>
   );
 };
