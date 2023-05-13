@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const saleSchema = new mongoose.Schema(
+const standbySchema = new mongoose.Schema(
   {
     Product_Name: {
       type: String,
@@ -21,4 +21,4 @@ const saleSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Sale", saleSchema);
+export default mongoose.model("Standby", standbySchema);
