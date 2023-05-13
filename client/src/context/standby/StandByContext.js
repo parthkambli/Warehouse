@@ -1,5 +1,6 @@
 import { createContext, useReducer } from "react";
 import StandByReducer from "./StandByReducer";
+import axios from "axios";
 
 // Initial state
 const initialState = {
@@ -17,12 +18,68 @@ export const StandByProvider = ({ children }) => {
 
   // Action
 
+  // Get all standby
+  async function getStandBy() {
+    try {
+      const res = await axios.get("/api/standby");
+      dispatch({
+        type: "GET_STANDBY",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
+  // add stadby
+  async function addStandBy(standby) {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post("/api/standby", standby, config);
+      dispatch({
+        type: "ADD_STANDBY",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
+  // delete standby
+  async function deleteStandBy(id) {
+    try {
+      await axios.delete(`/api/standby/${id}`);
+      dispatch({
+        type: "DELETE_STANDBY",
+        payload: id,
+      });
+    } catch (error) {
+      dispatch({
+        type: "ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   return (
     <StandByContext.Provider
       value={{
         standby: state.standby,
         error: state.error,
         loading: state.loading,
+        getStandBy,
+        addStandBy,
+        deleteStandBy,
       }}
     >
       {children}

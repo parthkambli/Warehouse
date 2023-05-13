@@ -1,27 +1,28 @@
 import React, { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { SaleContext } from "../context/sale/SaleContext";
+import { StandByContext } from "../context/standby/StandByContext";
 
-const SaleAdd = () => {
+const StandByAdd = () => {
   const [productName, setProductName] = useState("");
   const [customer, setCustomer] = useState("");
   const [qty, setQty] = useState(0);
 
-  const { addSale } = useContext(SaleContext);
+  const { addStandBy } = useContext(StandByContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const newSale = {
+    const newStandBy = {
       Product_Name: productName,
       Customer: customer,
       Quantity: qty,
     };
-    addSale(newSale);
+    addStandBy(newStandBy);
     setProductName("");
     setCustomer("");
     setQty(0);
   };
+
   return (
     <div className="col-sm-9 p-sm-5">
       <h1
@@ -72,4 +73,4 @@ const SaleAdd = () => {
   );
 };
 
-export default SaleAdd;
+export default StandByAdd;

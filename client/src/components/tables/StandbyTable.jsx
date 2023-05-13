@@ -1,7 +1,20 @@
-import { Badge, Button, Table } from "react-bootstrap";
+import { Badge, Button, Spinner, Table } from "react-bootstrap";
 import { TbPackageImport } from "react-icons/tb";
 
+import { format } from "date-fns";
+import { useContext, useEffect } from "react";
+import { StandByContext } from "../../context/standby/StandByContext";
+import { Link } from "react-router-dom";
+
 const StandbyTable = () => {
+  const { standby, getStandBy, deleteStandBy, loading } =
+    useContext(StandByContext);
+
+  useEffect(() => {
+    getStandBy();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <div
@@ -33,107 +46,51 @@ const StandbyTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Hand Bag</td>
-              <td>ABC</td>
-              <td>2</td>
-              <td>25-2-2023</td>
-              <td className="row m-0">
-                <Badge className="text-center text-white bg-warning fs-4 m-auto my-2 p-0 col-sm-3 col-12">
-                  <TbPackageImport />
-                </Badge>
-              </td>
-            </tr>
-            <tr>
-              <td>Laptop</td>
-              <td>XYZ</td>
-              <td>10</td>
-              <td>24-2-2023</td>
-              <td className="row m-0">
-                <Badge className="text-center text-white bg-warning fs-4 m-auto my-2 p-0 col-sm-3 col-12">
-                  <TbPackageImport />
-                </Badge>
-              </td>
-            </tr>
-            <tr>
-              <td>School Bag</td>
-              <td>Tech</td>
-              <td>2</td>
-              <td>22-1-2023</td>
-              <td className="row m-0">
-                <Badge className="text-center text-white bg-warning fs-4 m-auto my-2 p-0 col-sm-3 col-12">
-                  <TbPackageImport />
-                </Badge>
-              </td>
-            </tr>
-            <tr>
-              <td>School Bag</td>
-              <td>Tech</td>
-              <td>2</td>
-              <td>22-1-2023</td>
-              <td className="row m-0">
-                <Badge className="text-center text-white bg-warning fs-4 m-auto my-2 p-0 col-sm-3 col-12">
-                  <TbPackageImport />
-                </Badge>
-              </td>
-            </tr>
-            <tr>
-              <td>School Bag</td>
-              <td>Tech</td>
-              <td>2</td>
-              <td>22-1-2023</td>
-              <td className="row m-0">
-                <Badge className="text-center text-white bg-warning fs-4 m-auto my-2 p-0 col-sm-3 col-12">
-                  <TbPackageImport />
-                </Badge>
-              </td>
-            </tr>
-            <tr>
-              <td>School Bag</td>
-              <td>Tech</td>
-              <td>2</td>
-              <td>22-1-2023</td>
-              <td className="row m-0">
-                <Badge className="text-center text-white bg-warning fs-4 m-auto my-2 p-0 col-sm-3 col-12">
-                  <TbPackageImport />
-                </Badge>
-              </td>
-            </tr>
-            <tr>
-              <td>School Bag</td>
-              <td>Tech</td>
-              <td>2</td>
-              <td>22-1-2023</td>
-              <td className="row m-0">
-                <Badge className="text-center text-white bg-warning fs-4 m-auto my-2 p-0 col-sm-3 col-12">
-                  <TbPackageImport />
-                </Badge>
-              </td>
-            </tr>
-            <tr>
-              <td>School Bag</td>
-              <td>Tech</td>
-              <td>2</td>
-              <td>22-1-2023</td>
-              <td className="row m-0">
-                <Badge className="text-center text-white bg-warning fs-4 m-auto my-2 p-0 col-sm-3 col-12">
-                  <TbPackageImport />
-                </Badge>
-              </td>
-            </tr>
+            {loading ? (
+              <tr>
+                <td colSpan="5">
+                  <Spinner animation="border" variant="primary" />
+                </td>
+              </tr>
+            ) : standby.length <= 0 ? (
+              <tr>
+                <td colSpan="5">No standby record found</td>
+              </tr>
+            ) : (
+              standby.map((SB) => (
+                <tr key={SB._id}>
+                  <td>{SB.Product_Name}</td>
+                  <td>{SB.Customer}</td>
+                  <td>{SB.Quantity}</td>
+                  <td>{format(new Date(SB.createdAt), "dd MMM yyyy")}</td>
+                  <td className="row m-0">
+                    <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
+                      <Badge
+                        className="bg-warning"
+                        onClick={() => deleteStandBy(SB._id)}
+                      >
+                        <TbPackageImport className="fs-4" />
+                      </Badge>
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </Table>
       </div>
-      <Button
-        variant="primary"
-        className="m-2 float-end"
-        // style={{
-        //   backgroundColor: "#3282B8",
-        //   color: "#eeeeee",
-        // }}
-      >
-        Add
-      </Button>
+      <Link to="/standby-add">
+        <Button
+          variant="primary"
+          className="m-2 float-end"
+          // style={{
+          //   backgroundColor: "#3282B8",
+          //   color: "#eeeeee",
+          // }}
+        >
+          Add Stand By
+        </Button>
+      </Link>
     </>
   );
 };

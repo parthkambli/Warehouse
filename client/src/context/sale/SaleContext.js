@@ -43,10 +43,9 @@ export const SaleProvider = ({ children }) => {
     };
     try {
       const res = await axios.post("/api/sales", sale, config);
-      const { data } = res.data;
       dispatch({
         type: "ADD_SALE",
-        payload: data,
+        payload: res.data.data,
       });
     } catch (error) {
       dispatch({
