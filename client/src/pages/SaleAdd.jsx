@@ -9,6 +9,7 @@ const SaleAdd = () => {
   const [productName, setProductName] = useState("");
   const [customer, setCustomer] = useState("");
   const [qty, setQty] = useState(0);
+  const [standBy, setStandBy] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
   const { addSale, error } = useContext(SaleContext);
@@ -20,11 +21,13 @@ const SaleAdd = () => {
       Product_Name: productName,
       Customer: customer,
       Quantity: qty,
+      StandBy: standBy,
     };
     addSale(newSale);
     setProductName("");
     setCustomer("");
     setQty(0);
+    setStandBy(false);
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000);
   };
@@ -71,6 +74,14 @@ const SaleAdd = () => {
               value={qty}
               onChange={(e) => setQty(e.target.value)}
               placeholder="Enter Quantity"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check
+              type="checkbox"
+              value={standBy}
+              onChange={(e) => setStandBy(e.target.checked)}
+              label="StandBy"
             />
           </Form.Group>
 

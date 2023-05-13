@@ -9,6 +9,7 @@ const PurchaseAdd = () => {
   const [productName, setProductName] = useState("");
   const [supplier, setSupplier] = useState("");
   const [qty, setQty] = useState(0);
+  const [standBy, setStandBy] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
   const { addPurchase, error } = useContext(PurchaseContex);
@@ -20,11 +21,13 @@ const PurchaseAdd = () => {
       Product_Name: productName,
       Supplier: supplier,
       Quantity: qty,
+      StandBy: standBy,
     };
     addPurchase(newPurchase);
     setProductName("");
     setSupplier("");
     setQty(0);
+    setStandBy(false);
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000);
   };
@@ -71,6 +74,14 @@ const PurchaseAdd = () => {
               value={qty}
               onChange={(e) => setQty(e.target.value)}
               placeholder="Enter Quantity"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check
+              type="checkbox"
+              value={standBy}
+              onChange={(e) => setStandBy(e.target.checked)}
+              label="StandBy"
             />
           </Form.Group>
 

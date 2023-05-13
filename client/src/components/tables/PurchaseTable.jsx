@@ -46,6 +46,7 @@ const PurchaseTable = () => {
               <th>Product</th>
               <th>Supplier</th>
               <th>Qty</th>
+              <th>StandBy</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
@@ -53,13 +54,13 @@ const PurchaseTable = () => {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan="5">
+                <td colSpan="6">
                   <Spinner animation="border" variant="primary" />
                 </td>
               </tr>
             ) : purchases.length <= 0 ? (
               <tr>
-                <td colSpan="5">No Purchase record found</td>
+                <td colSpan="6">No Purchase record found</td>
               </tr>
             ) : (
               purchases.map((purchase) => (
@@ -67,6 +68,15 @@ const PurchaseTable = () => {
                   <td>{purchase.Product_Name}</td>
                   <td>{purchase.Supplier}</td>
                   <td>{purchase.Quantity}</td>
+                  <td>
+                    {purchase.StandBy ? (
+                      <Badge bg="warning" className="fs-6">
+                        StandBy
+                      </Badge>
+                    ) : (
+                      ""
+                    )}
+                  </td>
                   <td>{format(new Date(purchase.createdAt), "dd MMM yyyy")}</td>
                   <td className="row m-0">
                     <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">

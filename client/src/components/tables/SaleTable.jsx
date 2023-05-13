@@ -45,6 +45,7 @@ const SaleTable = () => {
               <th>Product</th>
               <th>Customer</th>
               <th>Qty</th>
+              <th>StandBy</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
@@ -52,13 +53,13 @@ const SaleTable = () => {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan="5">
+                <td colSpan="6">
                   <Spinner animation="border" variant="primary" />
                 </td>
               </tr>
             ) : sales.length <= 0 ? (
               <tr>
-                <td colSpan="5">No Sales record found</td>
+                <td colSpan="6">No Sales record found</td>
               </tr>
             ) : (
               sales.map((sale) => (
@@ -66,6 +67,15 @@ const SaleTable = () => {
                   <td>{sale.Product_Name}</td>
                   <td>{sale.Customer}</td>
                   <td>{sale.Quantity}</td>
+                  <td>
+                    {sale.StandBy ? (
+                      <Badge bg="warning" className="fs-6">
+                        StandBy
+                      </Badge>
+                    ) : (
+                      ""
+                    )}
+                  </td>
                   <td>{format(new Date(sale.createdAt), "dd MMM yyyy")}</td>
                   <td className="row m-0">
                     <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">

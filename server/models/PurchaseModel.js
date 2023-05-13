@@ -17,6 +17,10 @@ const purchaseSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
+    StandBy: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
