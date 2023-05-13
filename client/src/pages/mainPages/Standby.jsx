@@ -1,3 +1,4 @@
+// Components
 import StandbyTable from "../../components/tables/StandbyTable";
 
 const Standby = () => {

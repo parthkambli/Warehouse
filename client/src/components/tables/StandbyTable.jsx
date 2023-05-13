@@ -1,10 +1,15 @@
-import { Badge, Button, Spinner, Table } from "react-bootstrap";
-import { TbPackageImport } from "react-icons/tb";
-
-import { format } from "date-fns";
+// Hooks
 import { useContext, useEffect } from "react";
-import { StandByContext } from "../../context/standby/StandByContext";
+// React-Bootstrap
+import { Badge, Button, Spinner, Table } from "react-bootstrap";
+// React-Icons
+import { TbPackageImport } from "react-icons/tb";
+// React-router-dom
 import { Link } from "react-router-dom";
+// Context
+import { StandByContext } from "../../context/standby/StandByContext";
+// Date-fns
+import { format } from "date-fns";
 
 const StandbyTable = () => {
   const { standby, getStandBy, deleteStandBy, loading } =
@@ -80,14 +85,7 @@ const StandbyTable = () => {
         </Table>
       </div>
       <Link to="/standby-add">
-        <Button
-          variant="primary"
-          className="m-2 float-end"
-          // style={{
-          //   backgroundColor: "#3282B8",
-          //   color: "#eeeeee",
-          // }}
-        >
+        <Button variant="primary" className="m-2 float-end">
           Add Stand By
         </Button>
       </Link>

@@ -8,23 +8,22 @@ import SideMenu from "./components/menu/SideMenu";
 import OffCanvasMenu from "./components/OffCanvasMenu";
 
 // Pages
-
 import Inventory from "./pages/mainPages/Inventory";
-import Sale from "./pages/mainPages/Sale";
-import Purchase from "./pages/mainPages/Purchase";
-import Standby from "./pages/mainPages/Standby";
 import ProductDetail from "./pages/ProductDetail";
-import ProductEdit from "./pages/ProductEdit";
-import SaleEdit from "./pages/SaleEdit";
-import PurchaseEdit from "./pages/PurchaseEdit";
-import { ProductProvider } from "./context/product/ProductContext";
 import ProductAdd from "./pages/ProductAdd";
-import { SaleProvider } from "./context/sale/SaleContext";
+import ProductEdit from "./pages/ProductEdit";
+import Sale from "./pages/mainPages/Sale";
 import SaleAdd from "./pages/SaleAdd";
-import { PurchaseProvider } from "./context/purchase/PurchaseContext";
+import Purchase from "./pages/mainPages/Purchase";
 import PurchaseAdd from "./pages/PurchaseAdd";
-import { StandByProvider } from "./context/standby/StandByContext";
+import Standby from "./pages/mainPages/Standby";
 import StandByAdd from "./pages/StandByAdd";
+
+// Providers
+import { ProductProvider } from "./context/product/ProductContext";
+import { SaleProvider } from "./context/sale/SaleContext";
+import { PurchaseProvider } from "./context/purchase/PurchaseContext";
+import { StandByProvider } from "./context/standby/StandByContext";
 
 const App = () => {
   return (
@@ -44,12 +43,10 @@ const App = () => {
                   <Route path="/product-edit/:id" element={<ProductEdit />} />
                   <Route path="/sale" element={<Sale />} />
                   <Route path="/sale-add" element={<SaleAdd />} />
-                  <Route path="/sale-edit" element={<SaleEdit />} />
                   <Route path="/purchase" element={<Purchase />} />
                   <Route path="/purchase-add" element={<PurchaseAdd />} />
                   <Route path="/standby" element={<Standby />} />
                   <Route path="/standby-add" element={<StandByAdd />} />
-                  <Route path="/purchase-edit" element={<PurchaseEdit />} />
                 </Routes>
               </div>
             </BrowserRouter>

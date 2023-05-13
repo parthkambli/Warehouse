@@ -1,7 +1,9 @@
+// Hooks
 import { useContext, useState } from "react";
-import { ProductContext } from "../context/product/ProductContext";
-
+// React-Bootstrap
 import { Button, Form } from "react-bootstrap";
+// Context
+import { ProductContext } from "../context/product/ProductContext";
 
 const ProductAdd = () => {
   const [productName, setProductName] = useState("");

@@ -1,7 +1,11 @@
+// Hooks
 import { useContext, useEffect, useState } from "react";
+// React-Bootsrtap
 import { Button, Form, Spinner } from "react-bootstrap";
-import { ProductContext } from "../context/product/ProductContext";
+// React-router-dom
 import { useNavigate, useParams } from "react-router-dom";
+// Context
+import { ProductContext } from "../context/product/ProductContext";
 
 const ProductEdit = () => {
   const { product, getProduct, editProduct, loading } =

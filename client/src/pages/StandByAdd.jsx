@@ -1,5 +1,8 @@
-import React, { useContext, useState } from "react";
+// Hooks
+import { useContext, useState } from "react";
+// React-Bootstrap
 import { Button, Form } from "react-bootstrap";
+// Context
 import { StandByContext } from "../context/standby/StandByContext";
 
 const StandByAdd = () => {

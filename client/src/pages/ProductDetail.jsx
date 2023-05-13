@@ -1,11 +1,14 @@
+// Hooks
 import { useContext, useEffect } from "react";
-import { ProductContext } from "../context/product/ProductContext";
-
+// React-Bootstrap
 import { Badge, Spinner } from "react-bootstrap";
+// React-Icons
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
-
+// React-router-dom
 import { Link, useNavigate, useParams } from "react-router-dom";
-
+// Context
+import { ProductContext } from "../context/product/ProductContext";
+// Date-fns
 import { format } from "date-fns";
 
 const ProductDetail = () => {

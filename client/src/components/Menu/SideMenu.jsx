@@ -1,7 +1,11 @@
+// Hooks
 import { useState, useEffect } from "react";
 
+// react-icons
 import { FaWarehouse, FaShoppingCart } from "react-icons/fa";
 import { FiShoppingBag, FiClock } from "react-icons/fi";
+
+// components
 import MenuItems from "./MenuItems";
 
 const SideMenu = (props) => {

@@ -1,9 +1,14 @@
+// Hooks
 import { useContext, useEffect } from "react";
+// React-Bootstrap
 import { Badge, Button, Spinner, Table } from "react-bootstrap";
+// React-Icons
 import { FaRegTrashAlt } from "react-icons/fa";
+// React-router-dom
 import { Link } from "react-router-dom";
+// Context
 import { PurchaseContex } from "../../context/purchase/PurchaseContext";
-
+// date-fns
 import { format } from "date-fns";
 
 const PurchaseTable = () => {
@@ -81,15 +86,8 @@ const PurchaseTable = () => {
         </Table>
       </div>
       <Link to="/purchase-add">
-        <Button
-          variant="primary"
-          className="m-2 float-end"
-          // style={{
-          //   backgroundColor: "#3282B8",
-          //   color: "#eeeeee",
-          // }}
-        >
-          Purchase
+        <Button variant="primary" className="m-2 float-end">
+          Add Purchase
         </Button>
       </Link>
     </>

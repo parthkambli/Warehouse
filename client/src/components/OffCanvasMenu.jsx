@@ -1,5 +1,10 @@
+// Hooks
 import { useState } from "react";
+
+// React-Bootstrap
 import { Button, Offcanvas } from "react-bootstrap";
+
+// Components
 import SideMenu from "./menu/SideMenu";
 
 const OffCanvasMenu = () => {

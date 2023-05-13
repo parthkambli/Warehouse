@@ -7,13 +7,16 @@ dotenv.config({ path: "./config/config.env" });
 
 connectDB();
 
+// R0utes
 import productsRoute from "./routes/products.js";
 import salesRoute from "./routes/sales.js";
 import purchaseRoute from "./routes/purchase.js";
 import standbyRoutes from "./routes/standby.js";
 
+// Express app
 const app = express();
 
+// Middlewares
 app.use(express.json());
 
 if (process.env.NODE_ENV === "Devlopment") {
@@ -23,6 +26,7 @@ if (process.env.NODE_ENV === "Devlopment") {
   });
 }
 
+// Routes
 app.use("/api/products", productsRoute);
 app.use("/api/sales", salesRoute);
 app.use("/api/purchases", purchaseRoute);

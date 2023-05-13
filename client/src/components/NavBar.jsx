@@ -1,5 +1,10 @@
+// React-Bootstrap
 import { Navbar, Container, Image, Nav } from "react-bootstrap";
+
+// react-icons
 import { FiLogOut } from "react-icons/fi";
+
+// Logo
 import logo from "../Images/Logo.png";
 
 const NavBar = () => {

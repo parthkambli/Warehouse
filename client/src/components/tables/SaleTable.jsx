@@ -1,9 +1,14 @@
+// Hooks
 import { useContext, useEffect } from "react";
+// React-Bootstrap
 import { Badge, Button, Spinner, Table } from "react-bootstrap";
+// React-Icons
 import { FaRegTrashAlt } from "react-icons/fa";
+// React-Router-Dom
 import { Link } from "react-router-dom";
+// Context
 import { SaleContext } from "../../context/sale/SaleContext";
-
+// Date-fns
 import { format } from "date-fns";
 
 const SaleTable = () => {
@@ -79,15 +84,8 @@ const SaleTable = () => {
         </Table>
       </div>
       <Link to="/sale-add">
-        <Button
-          variant="primary"
-          className="m-2 float-end"
-          // style={{
-          //   backgroundColor: "#3282B8",
-          //   color: "#eeeeee",
-          // }}
-        >
-          Sale
+        <Button variant="primary" className="m-2 float-end">
+          Add Sale
         </Button>
       </Link>
     </>

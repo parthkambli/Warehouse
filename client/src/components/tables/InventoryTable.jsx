@@ -1,10 +1,14 @@
+// Hooks
 import { useContext, useEffect } from "react";
-import { ProductContext } from "../../context/product/ProductContext";
-
+// React-Bootstrap
 import { Badge, Button, Spinner, Table } from "react-bootstrap";
+// React-Icons
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import { GoEye } from "react-icons/go";
+// React-router-dom
 import { Link } from "react-router-dom";
+// Context
+import { ProductContext } from "../../context/product/ProductContext";
 
 const InventoryTable = () => {
   const { products, getProducts, deleteProduct, loading } =
@@ -101,14 +105,7 @@ const InventoryTable = () => {
         </Table>
       </div>
       <Link to="/product-add">
-        <Button
-          variant="primary"
-          className="m-2 float-end"
-          // style={{
-          //   backgroundColor: "#3282B8",
-          //   color: "#eeeeee",
-          // }}
-        >
+        <Button variant="primary" className="m-2 float-end">
           Add Product
         </Button>
       </Link>

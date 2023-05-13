@@ -1,3 +1,4 @@
+// components
 import InventoryTable from "../../components/tables/InventoryTable";
 
 const Inventory = () => {
