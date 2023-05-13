@@ -12,6 +12,7 @@ export default (state, action) => {
       return {
         ...state,
         standby: [...state.standby, action.payload],
+        error: null,
       };
 
     case "DELETE_STANDBY":
@@ -19,6 +20,13 @@ export default (state, action) => {
         ...state,
         standby: state.standby.filter((SB) => SB._id !== action.payload),
       };
+
+    case "ERROR":
+      return {
+        ...state,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

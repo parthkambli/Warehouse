@@ -32,21 +32,21 @@ export const addStandBy = async (req, res) => {
     if (!product) {
       return res
         .status(404)
-        .json({ success: false, error: "Product not found" });
+        .json({ success: false, error: "Product not found! " });
     }
 
     // condition to standby less then 0 product
     if (req.body.Quantity <= 0) {
       return res
         .status(400)
-        .json({ success: false, error: "You canot sell 0 or less product" });
+        .json({ success: false, error: "Please enter appropriate Quantity! " });
     }
 
     // checking the Spare qty of product
     if (product.Spare - req.body.Quantity < 0) {
       return res
         .status(400)
-        .json({ success: false, error: "Not enough product in spare" });
+        .json({ success: false, error: "Not enough product in spare! Please check inventory" });
     }
 
     // Create standby
@@ -60,9 +60,14 @@ export const addStandBy = async (req, res) => {
 
     return res.status(200).json({ success: true, data: standby });
   } catch (error) {
-    return res
-      .status(500)
-      .json({ success: false, error: "Server Error", Error: error.message });
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        error: Object.values(error.errors).map((val) => val.message),
+      });
+    } else {
+      return res.status(500).json({ success: false, error: "Server Error" });
+    }
   }
 };
 
@@ -79,7 +84,7 @@ export const deleteStandBy = async (req, res) => {
         .status(404)
         .json({ success: false, error: "Standby Record Not Found" });
     }
-    
+
     // search standby
     const standBy = await StandBy.findById({ _id: id });
 

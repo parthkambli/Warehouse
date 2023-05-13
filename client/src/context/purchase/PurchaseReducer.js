@@ -12,6 +12,7 @@ export default (state, action) => {
       return {
         ...state,
         purchases: [...state.purchases, action.payload],
+        error: null,
       };
 
     case "DELETE_PURCHASE":
@@ -20,6 +21,11 @@ export default (state, action) => {
         purchases: state.purchases.filter(
           (purchase) => purchase._id !== action.payload
         ),
+      };
+    case "ERROR":
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

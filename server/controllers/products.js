@@ -59,8 +59,14 @@ export const addProduct = async (req, res) => {
         success: false,
         error: Object.values(error.errors).map((val) => val.message),
       });
+    } else if (error.code === 11000) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Product name must be unique!" });
     } else {
-      return res.status(500).json({ success: false, error: "Server Error" });
+      return res
+        .status(500)
+        .json({ success: false, error: "Server Error", Error: error });
     }
   }
 };
@@ -72,6 +78,18 @@ export const addProduct = async (req, res) => {
 export const editProduct = async (req, res) => {
   const { id } = req.params;
   try {
+    // checking for emptyfields
+    if (req.body.Product_Name === "") {
+      return res
+        .status(400)
+        .json({ success: false, error: "Product name is required! " });
+    }
+    if (req.body.Model_No === "") {
+      return res
+        .status(400)
+        .json({ success: false, error: "Model No is required! " });
+    }
+
     // Check for mongoose valide id
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res
@@ -88,12 +106,26 @@ export const editProduct = async (req, res) => {
     if (!product) {
       return res
         .status(404)
-        .json({ success: false, error: "Product Not Found" });
+        .json({ success: false, error: "Product Not Found! " });
     }
+
     const updatedProduct = await Product.findById(id); // get updated Product in res(not required; just for my convenience)
     res.status(200).json({ succcess: true, data: updatedProduct });
   } catch (error) {
-    return res.status(500).json({ success: false, error: "Server Error" });
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        error: Object.values(error.errors).map((val) => val.message),
+      });
+    } else if (error.code === 11000) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Product name must be unique!" });
+    } else {
+      return res
+        .status(500)
+        .json({ success: false, error: "Server Error", Error: error });
+    }
   }
 };
 

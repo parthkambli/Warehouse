@@ -5,12 +5,12 @@ const purchaseSchema = new mongoose.Schema(
     Product_Name: {
       type: String,
       trim: true,
-      required: [true, "Product name is required"],
+      required: [true, "Product name is required! "],
     },
     Supplier: {
       type: String,
       trim: true,
-      required: [true, "Customer Name is required"],
+      required: [true, "Customer Name is required! "],
     },
     Quantity: {
       type: Number,

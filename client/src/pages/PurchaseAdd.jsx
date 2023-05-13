@@ -9,8 +9,9 @@ const PurchaseAdd = () => {
   const [productName, setProductName] = useState("");
   const [supplier, setSupplier] = useState("");
   const [qty, setQty] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
 
-  const { addPurchase } = useContext(PurchaseContex);
+  const { addPurchase, error } = useContext(PurchaseContex);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +25,8 @@ const PurchaseAdd = () => {
     setProductName("");
     setSupplier("");
     setQty(0);
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 3000);
   };
   return (
     <div className="col-sm-9 p-sm-5">
@@ -31,12 +34,17 @@ const PurchaseAdd = () => {
         style={{ fontFamily: "Georgia", fontWeight: "bold", color: "#3282B8" }}
         className="px-2"
       >
-        Sale Product :-
+        Add Pruchase :-
       </h1>
       <div
         className="border border-2 rounded-5 p-4"
         style={{ height: "65vh", backgroundColor: "#eeeeee" }}
       >
+        {error && showAlert && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-2">
             <Form.Label>Product Name :-</Form.Label>

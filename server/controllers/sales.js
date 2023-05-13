@@ -32,20 +32,23 @@ export const saleProduct = async (req, res) => {
     if (!product) {
       return res
         .status(404)
-        .json({ success: false, error: "Product not found" });
+        .json({ success: false, error: "Product not found! " });
     }
     // condition to sale less then 0 product
     if (req.body.Quantity <= 0) {
       return res
         .status(400)
-        .json({ success: false, error: "You canot sell 0 or less product" });
+        .json({ success: false, error: "Please enter appropriate Quantity! " });
     }
 
     // checking the Qty of product
     if (product.Quantity - req.body.Quantity < 0) {
       return res
         .status(400)
-        .json({ success: false, error: "Not enough quantity" });
+        .json({
+          success: false,
+          error: "Not enough quantity! please check inventory ",
+        });
     }
 
     // Creating sale

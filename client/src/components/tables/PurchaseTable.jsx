@@ -51,7 +51,6 @@ const PurchaseTable = () => {
             </tr>
           </thead>
           <tbody>
-            {console.log(loading)}
             {loading ? (
               <tr>
                 <td colSpan="5">

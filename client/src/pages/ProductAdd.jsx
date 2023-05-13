@@ -10,10 +10,11 @@ const ProductAdd = () => {
   const [model, setModel] = useState("");
   const [qty, setQty] = useState(0);
   const [spare, setSpare] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
 
-  const { addProduct } = useContext(ProductContext);
+  const { addProduct, error } = useContext(ProductContext);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const newProduct = {
@@ -22,11 +23,13 @@ const ProductAdd = () => {
       Quantity: qty,
       Spare: spare,
     };
-    addProduct(newProduct);
+    await addProduct(newProduct);
     setProductName("");
     setModel("");
     setQty(0);
     setSpare(0);
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 3000);
   };
 
   return (
@@ -41,6 +44,11 @@ const ProductAdd = () => {
         className="border border-2 rounded-5 p-4"
         style={{ height: "65vh", backgroundColor: "#eeeeee" }}
       >
+        {error && showAlert && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-2">
             <Form.Label>Product Name :-</Form.Label>

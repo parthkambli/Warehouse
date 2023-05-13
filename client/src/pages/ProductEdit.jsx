@@ -8,18 +8,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ProductContext } from "../context/product/ProductContext";
 
 const ProductEdit = () => {
-  const { product, getProduct, editProduct, loading } =
+  const { product, getProduct, editProduct, loading, error } =
     useContext(ProductContext);
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [submitted, setSubmitted] = useState(false);
   const [productName, setProductName] = useState("");
   const [model, setModel] = useState("");
   const [spare, setSpare] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      getProduct(id);
+      await getProduct(id);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,16 +34,26 @@ const ProductEdit = () => {
     }
   }, [loading, product]);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const editedProduct = {
       Product_Name: productName,
-      Model_NO: model,
+      Model_No: model,
       Spare: spare,
     };
-    editProduct(id, editedProduct);
-    navigate("/inventory");
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 3000);
+    await editProduct(id, editedProduct);
+    setSubmitted(true);
+    // !error && navigate("/inventory");
   };
+
+  useEffect(() => {
+    if (!error && submitted) {
+      navigate("/inventory");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error, submitted]);
 
   return (
     <div className="col-sm-9 p-sm-5">
@@ -60,6 +71,11 @@ const ProductEdit = () => {
         }
         style={{ height: "65vh", backgroundColor: "#eeeeee" }}
       >
+        {error && showAlert && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
         {loading ? (
           <Spinner animation="border" variant="primary" />
         ) : (

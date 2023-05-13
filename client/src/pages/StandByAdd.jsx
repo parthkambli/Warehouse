@@ -9,8 +9,9 @@ const StandByAdd = () => {
   const [productName, setProductName] = useState("");
   const [customer, setCustomer] = useState("");
   const [qty, setQty] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
 
-  const { addStandBy } = useContext(StandByContext);
+  const { addStandBy, error } = useContext(StandByContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +25,8 @@ const StandByAdd = () => {
     setProductName("");
     setCustomer("");
     setQty(0);
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 3000);
   };
 
   return (
@@ -32,12 +35,17 @@ const StandByAdd = () => {
         style={{ fontFamily: "Georgia", fontWeight: "bold", color: "#3282B8" }}
         className="px-2"
       >
-        Sale Product :-
+        Add StandBy :-
       </h1>
       <div
         className="border border-2 rounded-5 p-4"
         style={{ height: "65vh", backgroundColor: "#eeeeee" }}
       >
+        {error && showAlert && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-2">
             <Form.Label>Product Name :-</Form.Label>

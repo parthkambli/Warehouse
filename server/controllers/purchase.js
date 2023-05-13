@@ -33,14 +33,14 @@ export const purchaseProduct = async (req, res) => {
     if (!product) {
       return res
         .status(404)
-        .json({ success: false, error: "Product not found" });
+        .json({ success: false, error: "Product not found! " });
     }
 
     // condition to purchase less then 0 product
     if (req.body.Quantity <= 0) {
       return res.status(400).json({
         success: false,
-        error: "You canot purchase 0 or less product",
+        error: "Please enter appropriate Quantity! ",
       });
     }
 
@@ -61,9 +61,7 @@ export const purchaseProduct = async (req, res) => {
         error: Object.values(error.errors).map((val) => val.message),
       });
     } else {
-      return res
-        .status(500)
-        .json({ success: false, error: "Server Error", Error: error.message });
+      return res.status(500).json({ success: false, error: "Server Error" });
     }
   }
 };

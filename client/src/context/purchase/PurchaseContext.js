@@ -26,7 +26,6 @@ export const PurchaseProvider = ({ children }) => {
         type: "GET_PURCHASES",
         payload: res.data.data,
       });
-      console.log(state.loading);
     } catch (error) {
       dispatch({
         type: "ERROR",

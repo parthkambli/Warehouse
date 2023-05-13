@@ -39,7 +39,9 @@ const ProductDetail = () => {
         style={{ height: "65vh", backgroundColor: "#eeeeee" }}
       >
         {loading ? (
-          <Spinner animation="border" variant="primary" />
+          <div className="p-sm-4 px-sm-5 fs-5 position-relative h-100">
+            <Spinner animation="border" variant="primary" />
+          </div>
         ) : (
           <div className="p-sm-4 px-sm-5 fs-5 position-relative h-100">
             <p>

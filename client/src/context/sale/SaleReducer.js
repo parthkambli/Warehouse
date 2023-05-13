@@ -12,12 +12,19 @@ export default (state, action) => {
       return {
         ...state,
         sales: [...state.sales, action.payload],
+        error: null,
       };
 
     case "DELETE_SALE":
       return {
         ...state,
         sales: state.sales.filter((sale) => sale._id !== action.payload),
+      };
+
+    case "ERROR":
+      return {
+        ...state,
+        error: action.payload,
       };
 
     default:

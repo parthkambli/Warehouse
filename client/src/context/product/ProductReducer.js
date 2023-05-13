@@ -19,12 +19,16 @@ export default (state, action) => {
       return {
         ...state,
         products: [...state.products, action.payload],
+        error: null,
       };
 
     case "EDIT_PRODUCT":
       return {
         ...state,
-        product: action.payload,
+        products: state.products.map((product) =>
+          product._id === action.payload._id ? action.payload : product
+        ),
+        error: null,
         loading: false,
       };
 
