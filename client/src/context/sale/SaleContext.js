@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import SaleReducer from "./SaleReducer";
-import axios from "axios";
+import api from "../api";
 
 // Initial State ------------------------------------------------------------------------------------
 const initialState = {
@@ -21,7 +21,7 @@ export const SaleProvider = ({ children }) => {
   // get all sales -------------------------
   async function getSales() {
     try {
-      const res = await axios.get("/api/sales");
+      const res = await api.get("/api/sales");
       dispatch({
         type: "GET_SALES",
         payload: res.data.data,
@@ -42,7 +42,7 @@ export const SaleProvider = ({ children }) => {
       },
     };
     try {
-      const res = await axios.post("/api/sales", sale, config);
+      const res = await api.post("/api/sales", sale, config);
       dispatch({
         type: "ADD_SALE",
         payload: res.data.data,
@@ -58,7 +58,7 @@ export const SaleProvider = ({ children }) => {
   // delete sale ---------------------------
   async function deleteSale(id) {
     try {
-      await axios.delete(`/api/sales/${id}`);
+      await api.delete(`/api/sales/${id}`);
       dispatch({
         type: "DELETE_SALE",
         payload: id,

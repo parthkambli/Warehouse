@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import StandByReducer from "./StandByReducer";
-import axios from "axios";
+import api from "../api";
 
 // Initial state
 const initialState = {
@@ -21,7 +21,7 @@ export const StandByProvider = ({ children }) => {
   // Get all standby
   async function getStandBy() {
     try {
-      const res = await axios.get("/api/standby");
+      const res = await api.get("/api/standby");
       dispatch({
         type: "GET_STANDBY",
         payload: res.data.data,
@@ -42,7 +42,7 @@ export const StandByProvider = ({ children }) => {
       },
     };
     try {
-      const res = await axios.post("/api/standby", standby, config);
+      const res = await api.post("/api/standby", standby, config);
       dispatch({
         type: "ADD_STANDBY",
         payload: res.data.data,
@@ -58,7 +58,7 @@ export const StandByProvider = ({ children }) => {
   // delete standby
   async function deleteStandBy(id) {
     try {
-      await axios.delete(`/api/standby/${id}`);
+      await api.delete(`/api/standby/${id}`);
       dispatch({
         type: "DELETE_STANDBY",
         payload: id,

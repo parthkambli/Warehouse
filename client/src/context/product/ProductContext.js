@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import ProductReducer from "./ProductReducer";
-import axios from "axios";
+import api from "../api";
 
 // Initial State ------------------------------------------------------------------------
 const initialState = {
@@ -22,7 +22,7 @@ export const ProductProvider = ({ children }) => {
   // Get all products -----------------------------
   async function getProducts() {
     try {
-      const res = await axios.get("/api/products");
+      const res = await api.get("/api/products");
       dispatch({
         type: "GET_PRODUCTS",
         payload: res.data.data,
@@ -38,7 +38,7 @@ export const ProductProvider = ({ children }) => {
   // Get single product ---------------------------
   async function getProduct(id) {
     try {
-      const res = await axios.get(`/api/products/${id}`);
+      const res = await api.get(`/api/products/${id}`);
       dispatch({
         type: "GET_PRODUCT",
         payload: res.data.data,
@@ -59,7 +59,7 @@ export const ProductProvider = ({ children }) => {
       },
     };
     try {
-      const res = await axios.post("/api/products", product, config);
+      const res = await api.post("/api/products", product, config);
       dispatch({
         type: "ADD_PRODUCT",
         payload: res.data.data,
@@ -80,7 +80,7 @@ export const ProductProvider = ({ children }) => {
       },
     };
     try {
-      const res = await axios.patch(`/api/products/${id}`, product, config);
+      const res = await api.patch(`/api/products/${id}`, product, config);
       dispatch({
         type: "EDIT_PRODUCT",
         payload: res.data.data,
@@ -96,7 +96,7 @@ export const ProductProvider = ({ children }) => {
   // Delete product -------------------------------
   async function deleteProduct(id) {
     try {
-      await axios.delete(`/api/products/${id}`);
+      await api.delete(`/api/products/${id}`);
       dispatch({
         type: "DELETE_PRODUCT",
         payload: id,

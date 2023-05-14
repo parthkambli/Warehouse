@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import PurchaseReducer from "./PurchaseReducer";
-import axios from "axios";
+import api from "../api";
 
 // Initial State
 const initialState = {
@@ -21,7 +21,7 @@ export const PurchaseProvider = ({ children }) => {
   // get all purchase
   async function getPurchases() {
     try {
-      const res = await axios.get("/api/purchases");
+      const res = await api.get("/api/purchases");
       dispatch({
         type: "GET_PURCHASES",
         payload: res.data.data,
@@ -42,7 +42,7 @@ export const PurchaseProvider = ({ children }) => {
       },
     };
     try {
-      const res = await axios.post("/api/purchases", purchase, config);
+      const res = await api.post("/api/purchases", purchase, config);
       dispatch({
         type: "ADD_PURCHASE",
         payload: res.data.data,
@@ -58,7 +58,7 @@ export const PurchaseProvider = ({ children }) => {
   // delete purchase
   async function deletePurchase(id) {
     try {
-      await axios.delete(`/api/purchases/${id}`);
+      await api.delete(`/api/purchases/${id}`);
       dispatch({
         type: "DELETE_PURCHASE",
         payload: id,
