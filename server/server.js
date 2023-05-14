@@ -20,7 +20,8 @@ const app = express();
 // Middlewares
 app.use(
   cors({
-    origin: "https://warehouse-u37f.onrender.com",
+    origin:
+      "https://6460da710aa7bd01badd1563--resilient-banoffee-26e185.netlify.app",
   })
 );
 
