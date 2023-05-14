@@ -1,6 +1,7 @@
 import path from "path";
 import express from "express";
 import dotenv, { config } from "dotenv";
+import cors from "cors";
 import connectDB from "./config/db.js";
 
 dotenv.config({ path: "./config/config.env" });
@@ -17,6 +18,12 @@ import standbyRoutes from "./routes/standby.js";
 const app = express();
 
 // Middlewares
+app.use(
+  cors({
+    origin: "https://warehouse-rhe2.onrender.com/",
+  })
+);
+
 app.use(express.json());
 
 if (process.env.NODE_ENV === "Devlopment") {
