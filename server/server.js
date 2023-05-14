@@ -20,7 +20,7 @@ const app = express();
 // Middlewares
 app.use(
   cors({
-    origin: "https://warehouse-u37f.onrender.com/",
+    origin: "https://warehouse-u37f.onrender.com",
   })
 );
 
