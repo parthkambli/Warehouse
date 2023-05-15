@@ -24,6 +24,7 @@ import { ProductProvider } from "./context/product/ProductContext";
 import { SaleProvider } from "./context/sale/SaleContext";
 import { PurchaseProvider } from "./context/purchase/PurchaseContext";
 import { StandByProvider } from "./context/standby/StandByContext";
+import Landing from "./pages/mainPages/Landing";
 
 const App = () => {
   return (
@@ -33,22 +34,48 @@ const App = () => {
           <StandByProvider>
             <BrowserRouter>
               <NavBar />
-              <OffCanvasMenu />
-              <div className="row m-0">
-                <SideMenu className="d-sm-block d-none col-sm-3 " />
-                <Routes>
-                  <Route path="/inventory" element={<Inventory />} />
-                  <Route path="/product-view/:id" element={<ProductDetail />} />
-                  <Route path="/product-add" element={<ProductAdd />} />
-                  <Route path="/product-edit/:id" element={<ProductEdit />} />
-                  <Route path="/sale" element={<Sale />} />
-                  <Route path="/sale-add" element={<SaleAdd />} />
-                  <Route path="/purchase" element={<Purchase />} />
-                  <Route path="/purchase-add" element={<PurchaseAdd />} />
-                  <Route path="/standby" element={<Standby />} />
-                  <Route path="/standby-add" element={<StandByAdd />} />
-                </Routes>
-              </div>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <>
+                      <Landing />
+                    </>
+                  }
+                />
+                <Route
+                  path="/*"
+                  element={
+                    <>
+                      <OffCanvasMenu />
+                      <div className="row m-0">
+                        <SideMenu className="d-sm-block d-none col-sm-3 " />
+                        <Routes>
+                          <Route path="/inventory" element={<Inventory />} />
+                          <Route
+                            path="/product-view/:id"
+                            element={<ProductDetail />}
+                          />
+                          <Route path="/product-add" element={<ProductAdd />} />
+                          <Route
+                            path="/product-edit/:id"
+                            element={<ProductEdit />}
+                          />
+                          <Route path="/sale" element={<Sale />} />
+                          <Route path="/sale-add" element={<SaleAdd />} />
+                          <Route path="/purchase" element={<Purchase />} />
+                          <Route
+                            path="/purchase-add"
+                            element={<PurchaseAdd />}
+                          />
+                          <Route path="/standby" element={<Standby />} />
+                          <Route path="/standby-add" element={<StandByAdd />} />
+                        </Routes>
+                      </div>
+                    </>
+                  }
+                />
+              </Routes>
             </BrowserRouter>
           </StandByProvider>
         </PurchaseProvider>
