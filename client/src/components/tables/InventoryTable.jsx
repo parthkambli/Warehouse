@@ -1,14 +1,17 @@
 // Hooks
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 // React-Bootstrap
 import { Badge, Button, Spinner, Table } from "react-bootstrap";
 // React-Icons
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
 import { GoEye } from "react-icons/go";
+import { ImPrinter } from "react-icons/im";
 // React-router-dom
 import { Link } from "react-router-dom";
 // Context
 import { ProductContext } from "../../context/product/ProductContext";
+// Print
+import { useReactToPrint } from "react-to-print";
 
 const InventoryTable = () => {
   const { products, getProducts, deleteProduct, loading } =
@@ -18,6 +21,21 @@ const InventoryTable = () => {
     getProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const tablePDF = useRef();
+
+  const generatePDF = useReactToPrint({
+    content: () => {
+      const tableRef = tablePDF.current.cloneNode(true);
+      const actionCol = tableRef.querySelector("thead th:last-child");
+      const rows = tableRef.querySelectorAll("tbody tr");
+      actionCol.remove();
+      rows.forEach((row) => row.lastChild.remove());
+      return tableRef;
+    },
+    documentTitle: "Inventory",
+  });
+
   return (
     <>
       <div
@@ -34,6 +52,7 @@ const InventoryTable = () => {
           striped
           bordered
           hover
+          ref={tablePDF}
         >
           <thead
             className="align-middle text-center fs-5"
@@ -104,6 +123,9 @@ const InventoryTable = () => {
           </tbody>
         </Table>
       </div>
+      <Button variant="primary" className="m-2" onClick={generatePDF}>
+        <ImPrinter className="fs-4" />
+      </Button>
       <Link to="/product-add">
         <Button variant="primary" className="m-2 float-end">
           Add Product
