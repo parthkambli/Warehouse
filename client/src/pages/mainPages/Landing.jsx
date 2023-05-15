@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 // React-Bootstrap
 import { Container, Button } from "react-bootstrap";
+// React-router-dom
+import { Link } from "react-router-dom";
 // BG-Image
 import backgroundImage from "../../Images/Background.jpg";
 
@@ -45,34 +47,38 @@ const Landing = () => {
           <p className="display-6 m-0">An inventory management app</p>
         </div>
         <div className="my-3">
-          <Button
-            variant="primary"
-            size="lg"
-            className="me-3 "
-            style={{
-              borderRadius: "50px",
-              padding: "0.5rem 1.5rem",
-              fontWeight: "bold",
-              textTransform: "uppercase",
-              letterSpacing: "1px",
-            }}
-          >
-            Sign Up
-          </Button>
-          <Button
-            variant="outline-light"
-            size="lg"
-            className="mx-3 "
-            style={{
-              borderRadius: "50px",
-              padding: "0.5rem 1.5rem",
-              fontWeight: "bold",
-              textTransform: "uppercase",
-              letterSpacing: "1px",
-            }}
-          >
-            Log In
-          </Button>
+          <Link to="/inventory">
+            <Button
+              variant="primary"
+              size="lg"
+              className="me-3 "
+              style={{
+                borderRadius: "50px",
+                padding: "0.5rem 1.5rem",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+              }}
+            >
+              Sign Up
+            </Button>
+          </Link>
+          <Link to="/inventory">
+            <Button
+              variant="outline-light"
+              size="lg"
+              className="mx-3 "
+              style={{
+                borderRadius: "50px",
+                padding: "0.5rem 1.5rem",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+              }}
+            >
+              Log In
+            </Button>
+          </Link>
         </div>
       </Container>
     </div>
