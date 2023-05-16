@@ -45,7 +45,6 @@ const ProductEdit = () => {
     setTimeout(() => setShowAlert(false), 3000);
     await editProduct(id, editedProduct);
     setSubmitted(true);
-    // !error && navigate("/inventory");
   };
 
   useEffect(() => {
