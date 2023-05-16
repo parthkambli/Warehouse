@@ -1,14 +1,20 @@
 // Hooks
 import React, { useEffect, useState } from "react";
 // React-Bootstrap
-import { Container, Button } from "react-bootstrap";
+import { Alert, Button, Container, Form } from "react-bootstrap";
 // React-router-dom
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// React Icons
+import { BiArrowFromLeft } from "react-icons/bi";
 // BG-Image
 import backgroundImage from "../../Images/Background.jpg";
 
 const Landing = () => {
   const [navbarHeight, setNavbarHeight] = useState(0);
+  const [userName, setUserName] = useState("");
+  const [pass, setPass] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Get the height of the navbar
@@ -17,6 +23,15 @@ const Landing = () => {
       setNavbarHeight(navbar.offsetHeight);
     }
   }, []);
+
+  const Auth = (e) => {
+    e.preventDefault();
+    if (userName === "Technotronics" && pass === "Tech@123") {
+      navigate("/inventory");
+    } else {
+      setShowAlert(true);
+    }
+  };
 
   return (
     <div
@@ -41,44 +56,46 @@ const Landing = () => {
         }}
       ></div>
       <Container className="text-white" style={{ zIndex: 1, opacity: 1 }}>
-        <div style={{ fontFamily: "Georgia", fontWeight: "bold" }}>
-          <p className="display-6 m-0">Welcome to</p>
-          <p className="display-2 m-0">Warehouse</p>
-          <p className="display-6 m-0">An inventory management app</p>
-        </div>
-        <div className="my-3">
-          <Link to="/inventory">
-            <Button
-              variant="primary"
-              size="lg"
-              className="me-3 "
-              style={{
-                borderRadius: "50px",
-                padding: "0.5rem 1.5rem",
-                fontWeight: "bold",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-              }}
-            >
-              Sign Up
-            </Button>
-          </Link>
-          <Link to="/inventory">
-            <Button
-              variant="outline-light"
-              size="lg"
-              className="mx-3 "
-              style={{
-                borderRadius: "50px",
-                padding: "0.5rem 1.5rem",
-                fontWeight: "bold",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-              }}
-            >
-              Log In
-            </Button>
-          </Link>
+        <div className="row m-0">
+          <div
+            className="col-sm-6"
+            style={{ fontFamily: "Georgia", fontWeight: "bold" }}
+          >
+            <p className="display-6 m-0">Welcome to</p>
+            <p className="display-2 m-0">Warehouse</p>
+            <p className="display-6 m-0">An inventory management app</p>
+          </div>
+          <div className="col-sm-6">
+            <Form onSubmit={Auth}>
+              <Form.Group className="mb-3">
+                <Form.Label>User Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  placeholder="User Name"
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={pass}
+                  onChange={(e) => setPass(e.target.value)}
+                  placeholder="Password"
+                />
+              </Form.Group>
+              <Button variant="outline-light" type="submit">
+                <BiArrowFromLeft className="fs-4" />
+              </Button>
+            </Form>
+            {showAlert && (
+              <Alert variant="danger" className="mt-3">
+                Invalid credentials. Please try again.
+              </Alert>
+            )}
+          </div>
         </div>
       </Container>
     </div>
