@@ -48,9 +48,6 @@ const ProductDetail = () => {
               <strong>Product:-</strong> {product.Product_Name}
             </p>
             <p>
-              <strong>Model No:-</strong> {product.Model_No}
-            </p>
-            <p>
               <strong>Quantity:-</strong> {product.Quantity}
             </p>
             <p>

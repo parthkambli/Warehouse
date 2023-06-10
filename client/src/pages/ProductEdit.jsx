@@ -14,7 +14,6 @@ const ProductEdit = () => {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [productName, setProductName] = useState("");
-  const [model, setModel] = useState("");
   const [spare, setSpare] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
 
@@ -29,7 +28,6 @@ const ProductEdit = () => {
   useEffect(() => {
     if (!loading && product) {
       setProductName(product.Product_Name);
-      setModel(product.Model_No);
       setSpare(product.Spare);
     }
   }, [loading, product]);
@@ -38,7 +36,6 @@ const ProductEdit = () => {
     e.preventDefault();
     const editedProduct = {
       Product_Name: productName,
-      Model_No: model,
       Spare: spare,
     };
     setShowAlert(true);
@@ -86,15 +83,6 @@ const ProductEdit = () => {
                 value={productName}
                 onChange={(e) => setProductName(e.target.value)}
                 placeholder="Enter Product Name"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Model Number :-</Form.Label>
-              <Form.Control
-                type="text"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-                placeholder="Enter Model Number"
               />
             </Form.Group>
             <Form.Group className="mb-2">

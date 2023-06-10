@@ -84,11 +84,6 @@ export const editProduct = async (req, res) => {
         .status(400)
         .json({ success: false, error: "Product name is required! " });
     }
-    if (req.body.Model_No === "") {
-      return res
-        .status(400)
-        .json({ success: false, error: "Model No is required! " });
-    }
 
     // Check for mongoose valide id
     if (!mongoose.Types.ObjectId.isValid(id)) {

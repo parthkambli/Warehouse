@@ -7,7 +7,6 @@ import { ProductContext } from "../context/product/ProductContext";
 
 const ProductAdd = () => {
   const [productName, setProductName] = useState("");
-  const [model, setModel] = useState("");
   const [qty, setQty] = useState(0);
   const [spare, setSpare] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
@@ -19,13 +18,11 @@ const ProductAdd = () => {
 
     const newProduct = {
       Product_Name: productName,
-      Model_No: model,
       Quantity: qty,
       Spare: spare,
     };
     await addProduct(newProduct);
     setProductName("");
-    setModel("");
     setQty(0);
     setSpare(0);
     setShowAlert(true);
@@ -57,15 +54,6 @@ const ProductAdd = () => {
               value={productName}
               onChange={(e) => setProductName(e.target.value)}
               placeholder="Enter Product Name"
-            />
-          </Form.Group>
-          <Form.Group className="mb-2">
-            <Form.Label>Model Number :-</Form.Label>
-            <Form.Control
-              type="text"
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
-              placeholder="Enter Model Number"
             />
           </Form.Group>
           <Form.Group className="mb-2">
