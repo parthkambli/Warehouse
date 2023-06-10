@@ -1,9 +1,12 @@
 // Hooks
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // React-Bootstrap
 import { Button, Form } from "react-bootstrap";
 // Context
 import { StandByContext } from "../context/standby/StandByContext";
+// Select
+import Select from "react-select";
+import { ProductContext } from "../context/product/ProductContext";
 
 const StandByAdd = () => {
   const [productName, setProductName] = useState("");
@@ -13,6 +16,20 @@ const StandByAdd = () => {
 
   const { addStandBy, error, resetError, success, resetSuccess } =
     useContext(StandByContext);
+
+  const { getProducts, products } = useContext(ProductContext);
+
+  useEffect(() => {
+    getProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const productNamesArray = products.map((p) => p.Product_Name);
+
+  const productOptions = productNamesArray.map((product) => ({
+    value: product,
+    label: product,
+  }));
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -32,6 +49,10 @@ const StandByAdd = () => {
       resetError();
       resetSuccess();
     }, 3000);
+  };
+
+  const handleProductChange = (selectedOption) => {
+    setProductName(selectedOption.value);
   };
 
   return (
@@ -59,10 +80,13 @@ const StandByAdd = () => {
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-2">
             <Form.Label>Product Name :-</Form.Label>
-            <Form.Control
-              type="text"
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
+            <Select
+              options={productOptions}
+              value={productOptions.find(
+                (option) => option.value === productName
+              )}
+              onChange={handleProductChange}
+              isClearable
               placeholder="Enter Product Name"
             />
           </Form.Group>

@@ -1,9 +1,12 @@
 // Hooks
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // React-Bootstrap
 import { Button, Form } from "react-bootstrap";
 // Context
 import { SaleContext } from "../context/sale/SaleContext";
+import { ProductContext } from "../context/product/ProductContext";
+// Select
+import Select from "react-select";
 
 const SaleAdd = () => {
   const [productName, setProductName] = useState("");
@@ -14,6 +17,20 @@ const SaleAdd = () => {
 
   const { addSale, error, resetError, success, resetSuccess } =
     useContext(SaleContext);
+
+  const { getProducts, products } = useContext(ProductContext);
+
+  useEffect(() => {
+    getProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const productNamesArray = products.map((p) => p.Product_Name);
+
+  const productOptions = productNamesArray.map((product) => ({
+    value: product,
+    label: product,
+  }));
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +53,11 @@ const SaleAdd = () => {
       resetSuccess();
     }, 3000);
   };
+
+  const handleProductChange = (selectedOption) => {
+    setProductName(selectedOption.value);
+  };
+
   return (
     <div className="col-sm-9 p-sm-5">
       <h1
@@ -61,10 +83,13 @@ const SaleAdd = () => {
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-2">
             <Form.Label>Product Name :-</Form.Label>
-            <Form.Control
-              type="text"
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
+            <Select
+              options={productOptions}
+              value={productOptions.find(
+                (option) => option.value === productName
+              )}
+              onChange={handleProductChange}
+              isClearable
               placeholder="Enter Product Name"
             />
           </Form.Group>

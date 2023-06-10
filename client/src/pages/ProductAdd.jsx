@@ -81,7 +81,7 @@ const ProductAdd = () => {
               type="number"
               value={spare}
               onChange={(e) => setSpare(e.target.value)}
-              placeholder="Enter Saper"
+              placeholder="Enter Spare"
             />
           </Form.Group>
 

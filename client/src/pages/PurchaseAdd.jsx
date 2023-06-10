@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-expressions */
 // Hooks
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // React-Bootstrap
 import { Button, Form } from "react-bootstrap";
 // Context
 import { PurchaseContex } from "../context/purchase/PurchaseContext";
+import { ProductContext } from "../context/product/ProductContext";
+// Select
+import CreatableSelect from "react-select/creatable";
 
 const PurchaseAdd = () => {
   const [productName, setProductName] = useState("");
@@ -16,6 +19,23 @@ const PurchaseAdd = () => {
 
   const { addPurchase, error, resetError, success, resetSuccess } =
     useContext(PurchaseContex);
+
+  const { getProducts, products } = useContext(ProductContext);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      await getProducts();
+      const productNamesArray = products.map((p) => p.Product_Name);
+      const options = productNamesArray.map((product) => ({
+        value: product,
+        label: product,
+      }));
+      setProductOptions(options);
+    };
+    fetchProducts();
+  }, [getProducts, products]);
+
+  const [productOptions, setProductOptions] = useState([]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +61,25 @@ const PurchaseAdd = () => {
       resetSuccess();
     }, 3000);
   };
+
+  const handleProductChange = (selectedOption) => {
+    setProductName(selectedOption ? selectedOption.value : "");
+  };
+
+  const handleProductCreate = (inputValue) => {
+    // Create a new option object with the user-entered value
+    const newOption = {
+      value: inputValue,
+      label: inputValue,
+    };
+
+    setProductName(inputValue);
+
+    // Add the new option to the productOptions array
+    const newProductOptions = [...productOptions, newOption];
+    setProductOptions(newProductOptions);
+  };
+
   return (
     <div className="col-sm-9 p-sm-5">
       <h1
@@ -66,10 +105,14 @@ const PurchaseAdd = () => {
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-2">
             <Form.Label>Product Name :-</Form.Label>
-            <Form.Control
-              type="text"
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
+            <CreatableSelect
+              options={productOptions}
+              value={
+                productName ? { value: productName, label: productName } : null
+              }
+              onChange={handleProductChange}
+              onCreateOption={handleProductCreate}
+              isClearable
               placeholder="Enter Product Name"
             />
           </Form.Group>
