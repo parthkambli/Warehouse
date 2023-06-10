@@ -4,12 +4,13 @@ import { useContext, useEffect, useRef } from "react";
 import { Badge, Button, Spinner, Table } from "react-bootstrap";
 // React-Icons
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
-import { GoEye } from "react-icons/go";
 import { ImPrinter } from "react-icons/im";
 // React-router-dom
 import { Link } from "react-router-dom";
 // Context
 import { ProductContext } from "../../context/product/ProductContext";
+// date-fns
+import { format } from "date-fns";
 // Print
 import { useReactToPrint } from "react-to-print";
 
@@ -67,6 +68,7 @@ const InventoryTable = () => {
               <th>Product</th>
               <th>Qty</th>
               <th>Spare</th>
+              <th>Date</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -87,17 +89,8 @@ const InventoryTable = () => {
                   <td>{product.Product_Name}</td>
                   <td>{product.Quantity}</td>
                   <td>{product.Spare}</td>
+                  <td>{format(new Date(product.createdAt), "dd MMM yyyy")}</td>
                   <td className="row m-0">
-                    <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
-                      <Link
-                        to={`/product-view/${product._id}`}
-                        className="text-white"
-                      >
-                        <Badge className="bg-warning ">
-                          <GoEye className="fs-4" />
-                        </Badge>
-                      </Link>
-                    </span>
                     <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
                       <Link
                         to={`/product-edit/${product._id}`}

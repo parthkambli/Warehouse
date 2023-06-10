@@ -9,7 +9,6 @@ import OffCanvasMenu from "./components/OffCanvasMenu";
 
 // Pages
 import Inventory from "./pages/mainPages/Inventory";
-import ProductDetail from "./pages/ProductDetail";
 import ProductAdd from "./pages/ProductAdd";
 import ProductEdit from "./pages/ProductEdit";
 import Sale from "./pages/mainPages/Sale";
@@ -52,10 +51,6 @@ const App = () => {
                         <SideMenu className="d-sm-block d-none col-sm-3 " />
                         <Routes>
                           <Route path="/inventory" element={<Inventory />} />
-                          <Route
-                            path="/product-view/:id"
-                            element={<ProductDetail />}
-                          />
                           <Route path="/product-add" element={<ProductAdd />} />
                           <Route
                             path="/product-edit/:id"
