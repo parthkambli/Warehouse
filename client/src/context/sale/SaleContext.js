@@ -5,6 +5,7 @@ import api from "../api";
 // Initial State ------------------------------------------------------------------------------------
 const initialState = {
   sales: [],
+  success: null,
   error: null,
   loading: true,
 };
@@ -47,6 +48,10 @@ export const SaleProvider = ({ children }) => {
         type: "ADD_SALE",
         payload: res.data.data,
       });
+      dispatch({
+        type: "SUCCESS",
+        payload: res.data.message,
+      });
     } catch (error) {
       dispatch({
         type: "ERROR",
@@ -71,15 +76,33 @@ export const SaleProvider = ({ children }) => {
     }
   }
 
+  async function resetSuccess() {
+    dispatch({
+      type: "RESET_SUCCESS",
+      payload: null,
+    });
+  }
+
+  // Reset Error ----------------------------------
+  async function resetError() {
+    dispatch({
+      type: "RESET_ERROR",
+      payload: null,
+    });
+  }
+
   return (
     <SaleContext.Provider
       value={{
         sales: state.sales,
+        success: state.success,
         error: state.error,
         loading: state.loading,
         getSales,
         addSale,
         deleteSale,
+        resetError,
+        resetSuccess,
       }}
     >
       {children}

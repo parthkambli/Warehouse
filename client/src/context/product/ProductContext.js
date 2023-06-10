@@ -7,6 +7,7 @@ const initialState = {
   products: [],
   product: [],
   error: null,
+  success: null,
   loading: true,
 };
 
@@ -64,6 +65,10 @@ export const ProductProvider = ({ children }) => {
         type: "ADD_PRODUCT",
         payload: res.data.data,
       });
+      dispatch({
+        type: "SUCCESS",
+        payload: res.data.message,
+      });
     } catch (error) {
       dispatch({
         type: "ERROR",
@@ -84,6 +89,10 @@ export const ProductProvider = ({ children }) => {
       dispatch({
         type: "EDIT_PRODUCT",
         payload: res.data.data,
+      });
+      dispatch({
+        type: "SUCCESS",
+        payload: res.data.message,
       });
     } catch (error) {
       dispatch({
@@ -109,11 +118,27 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
+  // Reset Error ----------------------------------
+  async function resetSuccess() {
+    dispatch({
+      type: "RESET_SUCCESS",
+      payload: null,
+    });
+  }
+
+  // Reset Error ----------------------------------
+  async function resetError() {
+    dispatch({
+      type: "RESET_ERROR",
+      payload: null,
+    });
+  }
   return (
     <ProductContext.Provider
       value={{
         products: state.products,
         product: state.product,
+        success: state.success,
         error: state.error,
         loading: state.loading,
         getProducts,
@@ -121,6 +146,8 @@ export const ProductProvider = ({ children }) => {
         addProduct,
         editProduct,
         deleteProduct,
+        resetError,
+        resetSuccess,
       }}
     >
       {children}

@@ -5,6 +5,7 @@ import api from "../api";
 // Initial State
 const initialState = {
   purchases: [],
+  success: null,
   error: null,
   loading: true,
 };
@@ -47,6 +48,10 @@ export const PurchaseProvider = ({ children }) => {
         type: "ADD_PURCHASE",
         payload: res.data.data,
       });
+      dispatch({
+        type: "SUCCESS",
+        payload: res.data.message,
+      });
     } catch (error) {
       dispatch({
         type: "ERROR",
@@ -70,15 +75,33 @@ export const PurchaseProvider = ({ children }) => {
       });
     }
   }
+
+  async function resetSuccess() {
+    dispatch({
+      type: "RESET_SUCCESS",
+      payload: null,
+    });
+  }
+
+  // Reset Error ----------------------------------
+  async function resetError() {
+    dispatch({
+      type: "RESET_ERROR",
+      payload: null,
+    });
+  }
   return (
     <PurchaseContex.Provider
       value={{
         purchases: state.purchases,
+        success: state.success,
         error: state.error,
         loading: state.loading,
         getPurchases,
         addPurchase,
         deletePurchase,
+        resetError,
+        resetSuccess,
       }}
     >
       {children}

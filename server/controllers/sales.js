@@ -43,12 +43,10 @@ export const saleProduct = async (req, res) => {
 
     // checking the Qty of product
     if (product.Quantity - req.body.Quantity < 0) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          error: "Not enough quantity! please check inventory ",
-        });
+      return res.status(400).json({
+        success: false,
+        error: "Not enough quantity! please check inventory ",
+      });
     }
 
     // Creating sale
@@ -60,7 +58,9 @@ export const saleProduct = async (req, res) => {
       { $inc: { Quantity: -req.body.Quantity } }
     );
 
-    return res.status(200).json({ success: true, data: sale });
+    return res
+      .status(200)
+      .json({ success: true, data: sale, message: "Added Sales Successfully" });
   } catch (error) {
     if (error.name === "ValidationError") {
       return res.status(400).json({
@@ -97,7 +97,12 @@ export const deleteSale = async (req, res) => {
         .json({ success: false, error: "Sale Record Not Found" });
     }
 
-    res.status(200).json({ success: true, data: sale });
+    res
+      .status(200)
+      .json({
+        success: true,
+        data: sale,
+      });
   } catch (error) {
     return res.status(500).json({ success: false, error: "Server Error" });
   }

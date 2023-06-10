@@ -12,7 +12,8 @@ const SaleAdd = () => {
   const [standBy, setStandBy] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  const { addSale, error } = useContext(SaleContext);
+  const { addSale, error, resetError, success, resetSuccess } =
+    useContext(SaleContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +30,11 @@ const SaleAdd = () => {
     setQty(0);
     setStandBy(false);
     setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
+    setTimeout(() => {
+      setShowAlert(false);
+      resetError();
+      resetSuccess();
+    }, 3000);
   };
   return (
     <div className="col-sm-9 p-sm-5">
@@ -46,6 +51,11 @@ const SaleAdd = () => {
         {error && showAlert && (
           <div className="alert alert-danger" role="alert">
             {error}
+          </div>
+        )}
+        {success && !error && showAlert && (
+          <div className="alert alert-success" role="alert">
+            {success}
           </div>
         )}
         <Form onSubmit={onSubmit}>

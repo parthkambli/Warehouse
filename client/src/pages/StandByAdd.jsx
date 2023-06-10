@@ -11,7 +11,8 @@ const StandByAdd = () => {
   const [qty, setQty] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
 
-  const { addStandBy, error } = useContext(StandByContext);
+  const { addStandBy, error, resetError, success, resetSuccess } =
+    useContext(StandByContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +27,11 @@ const StandByAdd = () => {
     setCustomer("");
     setQty(0);
     setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
+    setTimeout(() => {
+      setShowAlert(false);
+      resetError();
+      resetSuccess();
+    }, 3000);
   };
 
   return (
@@ -44,6 +49,11 @@ const StandByAdd = () => {
         {error && showAlert && (
           <div className="alert alert-danger" role="alert">
             {error}
+          </div>
+        )}
+        {success && showAlert && (
+          <div className="alert alert-success" role="alert">
+            {success}
           </div>
         )}
         <Form onSubmit={onSubmit}>

@@ -5,6 +5,7 @@ import api from "../api";
 // Initial state
 const initialState = {
   standby: [],
+  success: null,
   error: null,
   loading: true,
 };
@@ -47,6 +48,10 @@ export const StandByProvider = ({ children }) => {
         type: "ADD_STANDBY",
         payload: res.data.data,
       });
+      dispatch({
+        type: "SUCCESS",
+        payload: res.data.message,
+      });
     } catch (error) {
       dispatch({
         type: "ERROR",
@@ -71,15 +76,33 @@ export const StandByProvider = ({ children }) => {
     }
   }
 
+  async function resetSuccess() {
+    dispatch({
+      type: "RESET_SUCCESS",
+      payload: null,
+    });
+  }
+
+  // Reset Error ----------------------------------
+  async function resetError() {
+    dispatch({
+      type: "RESET_ERROR",
+      payload: null,
+    });
+  }
+
   return (
     <StandByContext.Provider
       value={{
         standby: state.standby,
+        success: state.success,
         error: state.error,
         loading: state.loading,
         getStandBy,
         addStandBy,
         deleteStandBy,
+        resetError,
+        resetSuccess,
       }}
     >
       {children}

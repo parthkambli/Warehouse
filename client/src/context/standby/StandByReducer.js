@@ -21,6 +21,18 @@ export default (state, action) => {
         standby: state.standby.filter((SB) => SB._id !== action.payload),
       };
 
+    case "RESET_ERROR":
+      return {
+        ...state,
+        error: action.payload,
+      };
+
+    case "SUCCESS":
+      return {
+        ...state,
+        success: action.payload,
+      };
+
     case "ERROR":
       return {
         ...state,

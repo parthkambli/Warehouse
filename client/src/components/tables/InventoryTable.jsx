@@ -75,13 +75,13 @@ const InventoryTable = () => {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan="4">
+                <td colSpan="5">
                   <Spinner animation="border" variant="primary" />
                 </td>
               </tr>
             ) : products.length <= 0 ? (
               <tr>
-                <td colSpan="4">No product found</td>
+                <td colSpan="5">No product found</td>
               </tr>
             ) : (
               products.map((product) => (

@@ -8,8 +8,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ProductContext } from "../context/product/ProductContext";
 
 const ProductEdit = () => {
-  const { product, getProduct, editProduct, loading, error } =
-    useContext(ProductContext);
+  const {
+    product,
+    getProduct,
+    editProduct,
+    loading,
+    error,
+    resetError,
+  } = useContext(ProductContext);
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -34,12 +41,15 @@ const ProductEdit = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    resetError();
     const editedProduct = {
       Product_Name: productName,
       Spare: spare,
     };
     setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3000);
     await editProduct(id, editedProduct);
     setSubmitted(true);
   };

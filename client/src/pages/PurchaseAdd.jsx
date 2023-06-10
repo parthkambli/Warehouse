@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 // Hooks
 import { useContext, useState } from "react";
 // React-Bootstrap
@@ -10,13 +11,16 @@ const PurchaseAdd = () => {
   const [supplier, setSupplier] = useState("");
   const [qty, setQty] = useState(0);
   const [standBy, setStandBy] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const { addPurchase, error } = useContext(PurchaseContex);
+  const { addPurchase, error, resetError, success, resetSuccess } =
+    useContext(PurchaseContex);
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+    error ? setShowSuccess(false) : null;
+    success ? setShowError(false) : null;
     const newPurchase = {
       Product_Name: productName,
       Supplier: supplier,
@@ -28,8 +32,14 @@ const PurchaseAdd = () => {
     setSupplier("");
     setQty(0);
     setStandBy(false);
-    setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
+    setShowError(true);
+    setShowSuccess(true);
+    setTimeout(() => {
+      setShowError(false);
+      setShowSuccess(false);
+      resetError();
+      resetSuccess();
+    }, 3000);
   };
   return (
     <div className="col-sm-9 p-sm-5">
@@ -43,9 +53,14 @@ const PurchaseAdd = () => {
         className="border border-2 rounded-5 p-4"
         style={{ height: "65vh", backgroundColor: "#eeeeee" }}
       >
-        {error && showAlert && (
+        {error && showError && (
           <div className="alert alert-danger" role="alert">
             {error}
+          </div>
+        )}
+        {success && showSuccess && (
+          <div className="alert alert-success" role="alert">
+            {success}
           </div>
         )}
         <Form onSubmit={onSubmit}>

@@ -11,7 +11,8 @@ const ProductAdd = () => {
   const [spare, setSpare] = useState(0);
   const [showAlert, setShowAlert] = useState(false);
 
-  const { addProduct, error } = useContext(ProductContext);
+  const { addProduct, error, resetError, success, resetSuccess } =
+    useContext(ProductContext);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +27,11 @@ const ProductAdd = () => {
     setQty(0);
     setSpare(0);
     setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
+    setTimeout(() => {
+      setShowAlert(false);
+      resetError();
+      resetSuccess();
+    }, 3000);
   };
 
   return (
@@ -44,6 +49,11 @@ const ProductAdd = () => {
         {error && showAlert && (
           <div className="alert alert-danger" role="alert">
             {error}
+          </div>
+        )}
+        {success && showAlert && (
+          <div className="alert alert-success" role="alert">
+            {success}
           </div>
         )}
         <Form onSubmit={onSubmit}>

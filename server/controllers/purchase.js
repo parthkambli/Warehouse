@@ -25,16 +25,9 @@ export const getPurchases = async (req, res) => {
 export const purchaseProduct = async (req, res) => {
   try {
     // Search the product
-    const product = await Product.findOne({
+    let product = await Product.findOne({
       Product_Name: req.body.Product_Name,
     });
-
-    // checking the existence of product
-    if (!product) {
-      return res
-        .status(404)
-        .json({ success: false, error: "Product not found! " });
-    }
 
     // condition to purchase less then 0 product
     if (req.body.Quantity <= 0) {
@@ -47,13 +40,21 @@ export const purchaseProduct = async (req, res) => {
     // Creating purchase
     const purchase = await Purchase.create(req.body);
 
-    // Updating the product quantity
-    await Product.findByIdAndUpdate(
-      { _id: product._id },
-      { $inc: { Quantity: +req.body.Quantity } }
-    );
-
-    return res.status(200).json({ success: true, data: purchase });
+    // Create a new product if it doesn't exist and the purchase is successfully created
+    if (!product && purchase) {
+      product = await Product.create(req.body);
+    } else {
+      // Updating the product quantity
+      await Product.findByIdAndUpdate(
+        { _id: product._id },
+        { $inc: { Quantity: +req.body.Quantity } }
+      );
+    }
+    return res.status(200).json({
+      success: true,
+      data: purchase,
+      message: "Added Purchase Successfully",
+    });
   } catch (error) {
     if (error.name === "ValidationError") {
       return res.status(400).json({
@@ -61,7 +62,9 @@ export const purchaseProduct = async (req, res) => {
         error: Object.values(error.errors).map((val) => val.message),
       });
     } else {
-      return res.status(500).json({ success: false, error: "Server Error" });
+      return res
+        .status(500)
+        .json({ success: false, error: "Server Error", Err: error.message });
     }
   }
 };
@@ -89,7 +92,10 @@ export const deletePurchase = async (req, res) => {
         .json({ success: false, error: "Purchase record not found" });
     }
 
-    res.status(200).json({ success: true, data: purchase });
+    res.status(200).json({
+      success: true,
+      data: purchase,
+    });
   } catch (error) {
     return res.status(500).json({ success: false, error: "Server Error" });
   }

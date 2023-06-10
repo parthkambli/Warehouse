@@ -39,7 +39,7 @@ export const getPrroduct = async (req, res) => {
         .json({ success: false, error: "Product Not Found" });
     }
 
-    res.status(200).json({ succcess: true, data: product });
+    res.status(200).json({ success: true, data: product });
   } catch (error) {
     return res.status(500).json({ success: false, error: "Server Error" });
   }
@@ -52,7 +52,11 @@ export const getPrroduct = async (req, res) => {
 export const addProduct = async (req, res) => {
   try {
     const product = await Product.create(req.body);
-    return res.status(200).json({ success: true, data: product });
+    return res.status(200).json({
+      success: true,
+      data: product,
+      message: "Product Added Successfully",
+    });
   } catch (error) {
     if (error.name === "ValidationError") {
       return res.status(400).json({
@@ -105,7 +109,11 @@ export const editProduct = async (req, res) => {
     }
 
     const updatedProduct = await Product.findById(id); // get updated Product in res(not required; just for my convenience)
-    res.status(200).json({ succcess: true, data: updatedProduct });
+    res.status(200).json({
+      success: true,
+      data: updatedProduct,
+      message: "Product Edited Successfully",
+    });
   } catch (error) {
     if (error.name === "ValidationError") {
       return res.status(400).json({
@@ -149,6 +157,12 @@ export const deleteProduct = async (req, res) => {
 
     res.status(200).json({ success: true, data: product });
   } catch (error) {
-    return res.status(500).json({ success: false, error: "Server Error" });
+    return res
+      .status(500)
+      .json({
+        success: false,
+        error: "Server Error",
+        message: "Product Deleted Successfully",
+      });
   }
 };

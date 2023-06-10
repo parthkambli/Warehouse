@@ -19,7 +19,6 @@ export default (state, action) => {
       return {
         ...state,
         products: [...state.products, action.payload],
-        error: null,
       };
 
     case "EDIT_PRODUCT":
@@ -28,7 +27,6 @@ export default (state, action) => {
         products: state.products.map((product) =>
           product._id === action.payload._id ? action.payload : product
         ),
-        error: null,
         loading: false,
       };
 
@@ -38,6 +36,23 @@ export default (state, action) => {
         products: state.products.filter(
           (product) => product._id !== action.payload
         ),
+      };
+
+    case "SUCCESS":
+      return {
+        ...state,
+        success: action.payload,
+      };
+    case "RESET_SUCCESS":
+      return {
+        ...state,
+        success: action.payload,
+      };
+
+    case "RESET_ERROR":
+      return {
+        ...state,
+        error: action.payload,
       };
 
     case "ERROR":

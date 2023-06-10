@@ -46,7 +46,10 @@ export const addStandBy = async (req, res) => {
     if (product.Spare - req.body.Quantity < 0) {
       return res
         .status(400)
-        .json({ success: false, error: "Not enough product in spare! Please check inventory" });
+        .json({
+          success: false,
+          error: "Not enough product in spare! Please check inventory",
+        });
     }
 
     // Create standby
@@ -58,7 +61,13 @@ export const addStandBy = async (req, res) => {
       { $inc: { Spare: -req.body.Quantity } }
     );
 
-    return res.status(200).json({ success: true, data: standby });
+    return res
+      .status(200)
+      .json({
+        success: true,
+        data: standby,
+        message: "Added Stand_By Successfully",
+      });
   } catch (error) {
     if (error.name === "ValidationError") {
       return res.status(400).json({
@@ -109,7 +118,12 @@ export const deleteStandBy = async (req, res) => {
       { $inc: { Spare: +standby.Quantity } }
     );
 
-    res.status(200).json({ success: true, data: standby });
+    res
+      .status(200)
+      .json({
+        success: true,
+        data: standby,
+      });
   } catch (error) {
     return res.status(500).json({ success: false, error: "Server Error" });
   }
