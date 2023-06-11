@@ -52,6 +52,22 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
+  // Get searched product -------------------------
+  async function searchResult(searchKey) {
+    try {
+      const res = await api.get(`/api/products/search/${searchKey}`);
+      dispatch({
+        type: "SEARCH",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   // Add product ----------------------------------
   async function addProduct(product) {
     const config = {
@@ -142,6 +158,7 @@ export const ProductProvider = ({ children }) => {
         error: state.error,
         loading: state.loading,
         getProducts,
+        searchResult,
         getProduct,
         addProduct,
         editProduct,

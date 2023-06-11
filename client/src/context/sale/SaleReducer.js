@@ -21,6 +21,13 @@ export default (state, action) => {
         sales: state.sales.filter((sale) => sale._id !== action.payload),
       };
 
+    case "SEARCH":
+      return {
+        ...state,
+        sales: action.payload,
+        loading: false,
+      };
+
     case "SUCCESS":
       return {
         ...state,

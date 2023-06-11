@@ -14,8 +14,8 @@ import { format } from "date-fns";
 // Print
 import { useReactToPrint } from "react-to-print";
 
-const StandbyTable = () => {
-  const { standby, getStandBy, deleteStandBy, loading } =
+const StandbyTable = ({ searchKey }) => {
+  const { standby, getStandBy, deleteStandBy, searchResult, loading } =
     useContext(StandByContext);
 
   useEffect(() => {
@@ -23,6 +23,15 @@ const StandbyTable = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (searchKey === "") {
+      getStandBy();
+    } else {
+      searchResult(searchKey);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchKey]);
 
   const tablePDF = useRef();
 

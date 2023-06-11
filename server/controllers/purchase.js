@@ -17,6 +17,25 @@ export const getPurchases = async (req, res) => {
   }
 };
 
+// -----------------------------------------------------------------------------------------------
+// @desc - get search
+// @route - GET /api/products/:searchKey
+// -----------------------------------------------------------------------------------------------
+export const search = async (req, res) => {
+  const { searchKey } = req.params;
+  try {
+    const regex = new RegExp(searchKey, "i"); // Create case-insensitive regular expression
+    const purchases = await Purchase.find({ Product_Name: regex }).sort({
+      Product_Name: 1,
+    });
+    return res
+      .status(200)
+      .json({ success: true, count: purchases.length, data: purchases });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: "Server Error" });
+  }
+};
+
 // ----------------------------------------------------------------------------------------
 // @desc - Purchase product
 // @route - POST /api/purchases

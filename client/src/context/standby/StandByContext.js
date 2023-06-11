@@ -60,6 +60,22 @@ export const StandByProvider = ({ children }) => {
     }
   }
 
+  // Get searched result -------------------------
+  async function searchResult(searchKey) {
+    try {
+      const res = await api.get(`/api/standby/search/${searchKey}`);
+      dispatch({
+        type: "SEARCH",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   // delete standby
   async function deleteStandBy(id) {
     try {
@@ -99,6 +115,7 @@ export const StandByProvider = ({ children }) => {
         error: state.error,
         loading: state.loading,
         getStandBy,
+        searchResult,
         addStandBy,
         deleteStandBy,
         resetError,

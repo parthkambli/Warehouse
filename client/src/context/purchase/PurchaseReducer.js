@@ -23,6 +23,13 @@ export default (state, action) => {
         ),
       };
 
+    case "SEARCH":
+      return {
+        ...state,
+        purchases: action.payload,
+        loading: false,
+      };
+
     case "SUCCESS":
       return {
         ...state,

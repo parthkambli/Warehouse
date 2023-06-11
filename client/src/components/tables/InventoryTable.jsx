@@ -14,14 +14,23 @@ import { format } from "date-fns";
 // Print
 import { useReactToPrint } from "react-to-print";
 
-const InventoryTable = () => {
-  const { products, getProducts, deleteProduct, loading } =
+const InventoryTable = ({ searchKey }) => {
+  const { products, getProducts, deleteProduct, searchResult, loading } =
     useContext(ProductContext);
 
   useEffect(() => {
     getProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (searchKey === "") {
+      getProducts();
+    } else {
+      searchResult(searchKey);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchKey]);
 
   const tablePDF = useRef();
 

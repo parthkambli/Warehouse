@@ -60,6 +60,22 @@ export const PurchaseProvider = ({ children }) => {
     }
   }
 
+  // Get searched result -------------------------
+  async function searchResult(searchKey) {
+    try {
+      const res = await api.get(`/api/purchases/search/${searchKey}`);
+      dispatch({
+        type: "SEARCH",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   // delete purchase
   async function deletePurchase(id) {
     try {
@@ -98,6 +114,7 @@ export const PurchaseProvider = ({ children }) => {
         error: state.error,
         loading: state.loading,
         getPurchases,
+        searchResult,
         addPurchase,
         deletePurchase,
         resetError,

@@ -17,6 +17,25 @@ export const getSales = async (req, res) => {
   }
 };
 
+// -----------------------------------------------------------------------------------------------
+// @desc - get search
+// @route - GET /api/products/:searchKey
+// -----------------------------------------------------------------------------------------------
+export const search = async (req, res) => {
+  const { searchKey } = req.params;
+  try {
+    const regex = new RegExp(searchKey, "i"); // Create case-insensitive regular expression
+    const sales = await Sale.find({ Product_Name: regex }).sort({
+      Product_Name: 1,
+    });
+    return res
+      .status(200)
+      .json({ success: true, count: sales.length, data: sales });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: "Server Error" });
+  }
+};
+
 // ----------------------------------------------------------------------------------------
 // @desc - Sale product
 // @route - POST /api/sales
@@ -97,12 +116,10 @@ export const deleteSale = async (req, res) => {
         .json({ success: false, error: "Sale Record Not Found" });
     }
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        data: sale,
-      });
+    res.status(200).json({
+      success: true,
+      data: sale,
+    });
   } catch (error) {
     return res.status(500).json({ success: false, error: "Server Error" });
   }

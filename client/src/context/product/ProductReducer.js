@@ -38,6 +38,13 @@ export default (state, action) => {
         ),
       };
 
+    case "SEARCH":
+      return {
+        ...state,
+        products: action.payload,
+        loading: false,
+      };
+
     case "SUCCESS":
       return {
         ...state,

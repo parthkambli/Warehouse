@@ -60,6 +60,22 @@ export const SaleProvider = ({ children }) => {
     }
   }
 
+  // Get searched result -------------------------
+  async function searchResult(searchKey) {
+    try {
+      const res = await api.get(`/api/sales/search/${searchKey}`);
+      dispatch({
+        type: "SEARCH",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   // delete sale ---------------------------
   async function deleteSale(id) {
     try {
@@ -100,6 +116,7 @@ export const SaleProvider = ({ children }) => {
         loading: state.loading,
         getSales,
         addSale,
+        searchResult,
         deleteSale,
         resetError,
         resetSuccess,

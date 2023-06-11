@@ -17,6 +17,25 @@ export const getStandBy = async (req, res) => {
   }
 };
 
+// -----------------------------------------------------------------------------------------------
+// @desc - get search
+// @route - GET /api/products/:searchKey
+// -----------------------------------------------------------------------------------------------
+export const search = async (req, res) => {
+  const { searchKey } = req.params;
+  try {
+    const regex = new RegExp(searchKey, "i"); // Create case-insensitive regular expression
+    const standby = await StandBy.find({ Product_Name: regex }).sort({
+      Product_Name: 1,
+    });
+    return res
+      .status(200)
+      .json({ success: true, count: standby.length, data: standby });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: "Server Error" });
+  }
+};
+
 // ------------------------------------------------------------------------------
 // @desc - add standby
 // @route - POST /api/stanfby
@@ -44,12 +63,10 @@ export const addStandBy = async (req, res) => {
 
     // checking the Spare qty of product
     if (product.Spare - req.body.Quantity < 0) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          error: "Not enough product in spare! Please check inventory",
-        });
+      return res.status(400).json({
+        success: false,
+        error: "Not enough product in spare! Please check inventory",
+      });
     }
 
     // Create standby
@@ -61,13 +78,11 @@ export const addStandBy = async (req, res) => {
       { $inc: { Spare: -req.body.Quantity } }
     );
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        data: standby,
-        message: "Added Stand_By Successfully",
-      });
+    return res.status(200).json({
+      success: true,
+      data: standby,
+      message: "Added Stand_By Successfully",
+    });
   } catch (error) {
     if (error.name === "ValidationError") {
       return res.status(400).json({
@@ -118,12 +133,10 @@ export const deleteStandBy = async (req, res) => {
       { $inc: { Spare: +standby.Quantity } }
     );
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        data: standby,
-      });
+    res.status(200).json({
+      success: true,
+      data: standby,
+    });
   } catch (error) {
     return res.status(500).json({ success: false, error: "Server Error" });
   }
