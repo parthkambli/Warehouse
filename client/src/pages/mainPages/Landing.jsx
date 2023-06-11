@@ -26,7 +26,10 @@ const Landing = () => {
 
   const Auth = (e) => {
     e.preventDefault();
-    if (userName === "Technotronics" && pass === "Tech@123") {
+    if (
+      userName === process.env.REACT_APP_USER_NAME &&
+      pass === process.env.REACT_APP_PASS
+    ) {
       navigate("/inventory");
     } else {
       setShowAlert(true);
