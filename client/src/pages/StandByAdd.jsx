@@ -96,7 +96,7 @@ const StandByAdd = () => {
               type="text"
               value={customer}
               onChange={(e) => setCustomer(e.target.value)}
-              placeholder="Enter Model Number"
+              placeholder="Enter Customer Name"
             />
           </Form.Group>
           <Form.Group className="mb-2">
