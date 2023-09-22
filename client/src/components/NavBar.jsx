@@ -29,7 +29,7 @@ const NavBar = () => {
           </div>
         </Navbar.Brand>
         <Nav className="ml-auto">
-          <Nav.Link href="#logout" className="text-white">
+          <Nav.Link href="/" className="text-white">
             <FiLogOut /> Logout
           </Nav.Link>
         </Nav>

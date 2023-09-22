@@ -21,9 +21,9 @@ export const ProductProvider = ({ children }) => {
   // Actions --------------------------------------------------------
 
   // Get all products -----------------------------
-  async function getProducts() {
+  async function getProducts(filter) {
     try {
-      const res = await api.get("/api/products");
+      const res = await api.get(`/api/products/${filter}`);
       dispatch({
         type: "GET_PRODUCTS",
         payload: res.data.data,

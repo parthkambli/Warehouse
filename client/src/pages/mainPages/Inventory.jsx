@@ -2,6 +2,7 @@
 import { useContext, useState } from "react";
 import InventoryTable from "../../components/tables/InventoryTable";
 import { ProductContext } from "../../context/product/ProductContext";
+import Dropdown from "react-bootstrap/Dropdown";
 
 const Inventory = () => {
   const { success, resetSuccess } = useContext(ProductContext);
@@ -11,6 +12,7 @@ const Inventory = () => {
   }, 3000);
 
   const [searchKey, setSearchKey] = useState("");
+  const [filter, setFilter] = useState("All");
 
   return (
     <div className="col-sm-9 p-sm-4 px-sm-5">
@@ -27,6 +29,23 @@ const Inventory = () => {
             Inventory
           </h1>
           <div className="d-flex p-2">
+            <Dropdown>
+              <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                {filter}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => setFilter("All")}>
+                  All
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setFilter("Qty")}>
+                  Qty
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setFilter("Spare")}>
+                  Spare
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
             <input
               className="form-control mx-2"
               type="search"
@@ -43,7 +62,7 @@ const Inventory = () => {
           {success}
         </div>
       )}
-      <InventoryTable searchKey={searchKey} />
+      <InventoryTable searchKey={searchKey} filter={filter} />
     </div>
   );
 };

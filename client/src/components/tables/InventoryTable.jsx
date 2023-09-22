@@ -14,23 +14,23 @@ import { format } from "date-fns";
 // Print
 import { useReactToPrint } from "react-to-print";
 
-const InventoryTable = ({ searchKey }) => {
+const InventoryTable = ({ searchKey, filter }) => {
   const { products, getProducts, deleteProduct, searchResult, loading } =
     useContext(ProductContext);
 
   useEffect(() => {
-    getProducts();
+    getProducts(filter);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (searchKey === "") {
-      getProducts();
+      getProducts(filter);
     } else {
       searchResult(searchKey);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchKey]);
+  }, [searchKey, filter]);
 
   const tablePDF = useRef();
 
@@ -75,8 +75,8 @@ const InventoryTable = ({ searchKey }) => {
           >
             <tr>
               <th>Product</th>
-              <th>Qty</th>
-              <th>Spare</th>
+              {filter !== "Spare" && <th>Qty</th>}
+              {filter !== "Qty" && <th>Spare</th>}
               <th>Date</th>
               <th>Actions</th>
             </tr>
@@ -96,8 +96,8 @@ const InventoryTable = ({ searchKey }) => {
               products.map((product) => (
                 <tr key={product._id}>
                   <td>{product.Product_Name}</td>
-                  <td>{product.Quantity}</td>
-                  <td>{product.Spare}</td>
+                  {filter !== "Spare" && <td>{product.Quantity}</td>}
+                  {filter !== "Qty" && <td>{product.Spare}</td>}
                   <td>{format(new Date(product.createdAt), "dd MMM yyyy")}</td>
                   <td className="row m-0">
                     <span className="text-center  m-auto my-2 p-0 col-sm-3 col-12">
