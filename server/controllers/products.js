@@ -34,6 +34,41 @@ export const search = async (req, res) => {
     return res.status(500).json({ success: false, error: "Server Error" });
   }
 };
+
+// -----------------------------------------------------------------------------------------------
+// @desc - get Qty products
+// @route - GET /api/products
+// -----------------------------------------------------------------------------------------------
+export const getQtyProduct = async (req, res) => {
+  try {
+    const products = await Product.find({ Quantity: { $gt: 0 } }).sort({
+      Product_Name: 1,
+    });
+    return res
+      .status(200)
+      .json({ success: true, count: products.length, data: products });
+    console.log("Qty product from server");
+  } catch (error) {
+    return res.status(500).json({ success: false, error: "Server Error" });
+  }
+};
+// -----------------------------------------------------------------------------------------------
+// @desc - get Spare products
+// @route - GET /api/products
+// -----------------------------------------------------------------------------------------------
+export const getSpareProduct = async (req, res) => {
+  try {
+    const products = await Product.find({ Spare: { $gt: 0 } }).sort({
+      Product_Name: 1,
+    });
+    return res
+      .status(200)
+      .json({ success: true, count: products.length, data: products });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: "Server Error" });
+  }
+};
+
 // -----------------------------------------------------------------------------------------------
 // @desc - Get a single product
 // @rout - GET /api/products/:id
